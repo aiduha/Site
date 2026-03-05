@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Айдана — Имиджмейкер. Система 6-Type</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   АЙДАНА — index.html  (Netlify / GitHub Pages ready)
+   Дизайн-система: #0f0f0f фон, #F5F3EF текст, Cormorant + Inter
+   Все цвета — литеральный HEX. font-synthesis:none везде.
+   ============================================================ */
+
+/* ── ПЕРЕМЕННЫЕ ── */
+:root{
+–bg:     #0f0f0f;
+–bg1:    #131313;
+–bg2:    #181818;
+–brd:    #252525;
+–brd2:   #303030;
+–t1:     #F5F3EF;
+–t2:     #CFCBC4;
+–t3:     #7A7470;
+–acc:    #A1584D;
+–acc-lt: #C07060;
+–serif:  ‘Cormorant Garamond’,‘Georgia’,‘Times New Roman’,serif;
+–sans:   ‘Inter’,‘Helvetica Neue’,‘Arial’,sans-serif;
+–wrap:   1100px;
+–sec:    clamp(64px,9vw,120px);
+–cp:     clamp(1.6rem,4vw,3rem);
+–ease:   cubic-bezier(.16,1,.3,1);
+–ts:     .8s;
+–tm:     .4s;
+}
+
+/* ── RESET ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-synthesis:none}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+background:#0f0f0f;
+color:#F5F3EF;
+font-family:‘Inter’,‘Helvetica Neue’,‘Arial’,sans-serif;
+font-size:16px;font-weight:400;line-height:1.8;
+overflow-x:hidden;
+-webkit-font-smoothing:antialiased;
+-moz-osx-font-smoothing:grayscale;
+}
+img{display:block;max-width:100%;height:auto}
+a{text-decoration:none;color:inherit}
+::selection{background:#5C2F29;color:#F5F3EF}
+
+/* ── ТИПОГРАФИКА ── */
+h1,h2,h3,h4{
+font-family:‘Cormorant Garamond’,‘Georgia’,‘Times New Roman’,serif;
+font-weight:500;color:#F5F3EF;
+line-height:1.1;letter-spacing:.01em;
+text-rendering:optimizeLegibility;
+}
+/* Заголовки разделов — крупнее */
+h1{font-size:clamp(3.4rem,8.5vw,8rem);letter-spacing:-.01em}
+h2{font-size:clamp(2.1rem,4.5vw,3.8rem);line-height:1.15}
+p{font-size:1rem;line-height:1.8;color:#F5F3EF}
+
+.eyebrow{
+font-family:‘Inter’,‘Helvetica Neue’,‘Arial’,sans-serif;
+font-size:.68rem;font-weight:600;
+letter-spacing:.3em;text-transform:uppercase;
+color:#7A7470;display:block;margin-bottom:1.2rem;
+}
+
+/* ── LAYOUT ── */
+.wrap{max-width:var(–wrap);margin:0 auto;padding:0 clamp(1.2rem,5vw,3.5rem)}
+.sec{padding:var(–sec) 0}
+
+/* Контентный блок — ограниченная ширина, читаемая типографика */
+.content-block{max-width:700px;margin:0 auto}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(20px);transition:opacity var(–ts) var(–ease),transform var(–ts) var(–ease)}
+.rv.on{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+
+/* ── PROGRESS BAR ── */
+#prog{position:fixed;top:0;left:0;height:2px;width:0;background:#A1584D;z-index:500;pointer-events:none;transition:width .08s linear}
+
+/* ══════════════════════════
+НАВИГАЦИЯ
+══════════════════════════ */
+nav{
+position:fixed;top:0;left:0;right:0;z-index:400;
+height:60px;display:flex;align-items:center;justify-content:space-between;
+padding:0 clamp(1.2rem,5vw,3.5rem);
+border-bottom:1px solid #252525;
+background:transparent;
+transition:background var(–tm) ease;
+}
+nav.s{background:#0f0f0f}
+.nav-logo{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:1.15rem;letter-spacing:.14em;color:#F5F3EF;transition:color var(–tm) ease}
+.nav-logo:hover{color:#CFCBC4}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.65rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#7A7470;transition:color var(–tm) ease}
+.nav-links a:hover{color:#F5F3EF}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
+.burger span{width:22px;height:1px;background:#F5F3EF;display:block;transition:all .3s ease}
+
+.mmenu{display:none;position:fixed;inset:0;z-index:399;background:#0f0f0f;flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
+.mmenu.open{display:flex}
+.mmenu a{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:clamp(2rem,6vw,3rem);letter-spacing:.08em;color:#F5F3EF;transition:color var(–tm) ease}
+.mmenu a:hover{color:#CFCBC4}
+
+/* ══════════════════════════
+HERO — photo full-width + PNG absolute right
+══════════════════════════ */
+#hero{
+min-height:100svh;
+background:#0f0f0f;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+padding-top:60px; /* высота nav */
+}
+
+/* hero-container: фото на всю ширину, PNG поверх справа */
+.hero-container{
+position:relative;
+width:100%;
+overflow:hidden;
+}
+
+/* Фото — на всю ширину блока */
+.hero-photo-full{
+width:100%;
+display:block;
+object-fit:cover;
+object-position:top center;
+max-height:90vh;
+}
+
+/* PNG — абсолютно, правый верх над фото */
+.hero-png{
+position:absolute;
+top:clamp(1rem,4vh,3rem);
+right:clamp(0px,-2vw,0px);
+width:clamp(120px,14vw,200px);
+height:auto;
+object-fit:contain;
+pointer-events:none;
+z-index:10;
+}
+
+/* Текст-блок под фото */
+.hero-text{
+padding:clamp(2rem,4vh,3.5rem) clamp(1.2rem,5vw,3.5rem) clamp(2.5rem,5vh,4rem);
+background:#0f0f0f;
+position:relative;z-index:2;
+}
+
+.hero-ey{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.hero-ey::before{content:’’;width:28px;height:1px;background:#C07060;flex-shrink:0}
+
+.hero-name{
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:clamp(4rem,9.5vw,8.5rem);
+font-weight:400;color:#F5F3EF;
+letter-spacing:-.01em;line-height:.92;
+margin-bottom:1rem;
+}
+.hero-sub{
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:clamp(1.05rem,1.8vw,1.3rem);
+font-style:italic;color:#CFCBC4;
+line-height:1.6;max-width:480px;
+margin-bottom:1.8rem;
+}
+
+/* Соцсети */
+.socials{display:flex;gap:1rem;flex-wrap:wrap}
+.socials a{
+display:inline-flex;align-items:center;gap:.45rem;
+font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+color:#CFCBC4;padding:8px 16px 8px 11px;
+border:1px solid #303030;
+transition:color var(–tm) ease,border-color var(–tm) ease,transform var(–tm) ease;
+}
+.socials a:hover{color:#F5F3EF;border-color:#CFCBC4;transform:translateY(-2px)}
+.soc-icon{width:14px;height:14px;flex-shrink:0}
+
+/* ── DIVIDER ── */
+.divider{
+padding:1.8rem 0;
+border-top:1px solid #252525;border-bottom:1px solid #252525;
+background:#0f0f0f;
+}
+.divider-inner{
+display:flex;align-items:center;justify-content:center;
+gap:2rem;flex-wrap:wrap;
+padding:0 clamp(1.2rem,5vw,3.5rem);
+}
+.divider-word{font-size:.62rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#7A7470;white-space:nowrap}
+.divider-dot{width:3px;height:3px;border-radius:50%;background:#C07060;flex-shrink:0}
+
+/* стрелка вниз */
+.arrow-down{display:flex;align-items:center;margin-top:1.8rem}
+.arrow-down::after{
+content:’’;display:block;width:10px;height:10px;
+border-right:1px solid #C07060;border-bottom:1px solid #C07060;
+transform:rotate(45deg) translateY(-3px);
+}
+
+/* ══════════════════════════
+МЕТОД
+══════════════════════════ */
+#method{position:relative;background:#0f0f0f}
+#method .wrap{position:relative;z-index:1}
+.method-top{margin-bottom:clamp(2.5rem,5vw,4rem)}
+
+/* Заголовок метода — крупнее */
+.method-top h2{
+font-size:clamp(2rem,4.5vw,3.6rem);
+line-height:1.15;
+color:#F5F3EF;
+max-width:820px;
+}
+
+/* ── ТАБЛИЦА ── */
+.compare-table{
+width:100%;border-collapse:collapse;
+border:1px solid #252525;table-layout:fixed;
+}
+.compare-table thead th{
+font-family:‘Inter’,‘Helvetica Neue’,Arial,sans-serif;
+font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+padding:1rem 1.8rem;
+background:#131313;
+border-bottom:1px solid #252525;
+text-align:left;color:#7A7470;
+}
+.compare-table thead th:first-child{border-right:1px solid #252525}
+.compare-table thead th:last-child{color:#C07060}
+.compare-table td{
+padding:1.2rem 1.8rem;
+border-bottom:1px solid #252525;
+vertical-align:top;text-align:left;
+font-size:1rem;line-height:1.8;
+}
+.compare-table td:first-child{border-right:1px solid #252525;color:#CFCBC4}
+.compare-table td:last-child{color:#F5F3EF}
+.compare-table tbody tr:last-child td{border-bottom:none}
+.compare-table tbody tr:nth-child(odd)  td{background:#0f0f0f}
+.compare-table tbody tr:nth-child(even) td{background:#171717}
+.tc{display:flex;align-items:flex-start;gap:.75rem}
+.mark{display:inline-block;flex-shrink:0;font-size:1.05rem;line-height:1;position:relative;top:.05em}
+
+/* ══════════════════════════
+ФОРМАТЫ
+══════════════════════════ */
+#formats{position:relative;background:#0f0f0f}
+#formats .wrap{position:relative;z-index:1}
+.formats-intro{max-width:760px;margin-bottom:clamp(3rem,5vw,5rem)}
+
+/* Заголовок форматов — крупнее */
+.formats-intro h2{
+margin-top:1rem;
+font-size:clamp(1.9rem,4vw,3.2rem);
+line-height:1.2;color:#F5F3EF;
+}
+
+.format-stack{display:flex;flex-direction:column;gap:6px}
+
+/* ── Карточка формата ── */
+.fcard{
+background:#181818;border:1px solid #252525;
+padding:var(–cp);position:relative;overflow:hidden;
+transition:transform var(–tm) var(–ease),box-shadow var(–tm) var(–ease),border-color var(–tm) ease;
+}
+.fcard:hover{transform:translateY(-3px);box-shadow:0 14px 50px #000;border-color:#303030}
+.fcard::before{
+content:’’;position:absolute;left:0;top:15%;bottom:15%;
+width:2px;background:#A1584D;opacity:0;
+transition:opacity var(–tm) ease;
+}
+.fcard:hover::before{opacity:.5}
+
+/* PRO */
+.fcard.pro{border-color:#5C2F29;box-shadow:0 0 0 1px #2B1210,0 6px 36px #1A0A08,inset 0 1px 0 #3D1A18}
+.fcard.pro:hover{transform:translateY(-4px);border-color:#7A3A34;box-shadow:0 0 0 1px #3D1A18,0 20px 60px #000,inset 0 1px 0 #4E2220}
+.fcard.pro::before{opacity:.55}
+.fcard.pro:hover::before{opacity:.8}
+
+/* Декор-номер фона — крупнее */
+.fcard-idx{
+position:absolute;top:var(–cp);right:var(–cp);
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:clamp(5rem,8vw,9rem);
+font-weight:400;color:#1e1e1e;line-height:1;
+pointer-events:none;user-select:none;
+}
+
+/* Метка тира (Light/Basic/Pro) */
+.f-tier{
+font-size:.68rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;
+color:#7A7470;
+margin-bottom:.7rem;
+padding-top:.3rem;
+}
+.fcard.pro .f-tier{color:#C07060}
+
+/* Название формата — крупнее, с отступом */
+.f-name{
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:clamp(2.2rem,4vw,3.2rem);
+font-weight:400;color:#F5F3EF;line-height:1;
+margin-bottom:.5rem;
+padding-bottom:.4rem;
+}
+
+/* Подпись формата */
+.f-tag{
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:clamp(.95rem,1.8vw,1.15rem);
+font-style:italic;color:#CFCBC4;
+margin-bottom:2.5rem;
+min-height:1.6em;
+}
+
+/* двухколонная сетка */
+.f-body{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:clamp(2rem,4vw,3.5rem);
+margin-bottom:2.4rem;
+}
+
+/* Лейблы секций */
+.f-lbl{
+font-size:.65rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+color:#7A7470;
+margin-bottom:1.1rem;padding-bottom:.7rem;
+border-bottom:1px solid #252525;
+}
+
+/* ── Списки — тире как маркер ── */
+.l-who{list-style:none;display:flex;flex-direction:column;gap:.85rem}
+.l-who li{
+font-size:1rem;line-height:1.75;color:#F5F3EF;
+padding-left:1.6rem;position:relative;
+}
+.l-who li::before{
+content:’–’;
+position:absolute;left:0;top:0;
+color:#7A7470;font-weight:400;
+}
+
+/* ── Процесс работы — крупнее, больше отступов ── */
+.process{list-style:none;display:flex;flex-direction:column;gap:1.1rem}
+.process li{
+font-size:1rem;line-height:1.8;color:#F5F3EF;
+padding-left:2.6rem;position:relative;
+}
+.process li::before{
+position:absolute;left:0;top:.05em;
+font-size:.72rem;font-weight:600;letter-spacing:.08em;
+color:#7A7470;
+font-family:‘Inter’,‘Helvetica Neue’,Arial,sans-serif;
+line-height:1.8;
+}
+.process li:nth-child(1)::before{content:‘01’}
+.process li:nth-child(2)::before{content:‘02’}
+.process li:nth-child(3)::before{content:‘03’}
+.process li:nth-child(4)::before{content:‘04’}
+.process li:nth-child(5)::before{content:‘05’}
+.process li:nth-child(6)::before{content:‘06’}
+
+/* ── «Вы получаете» ── */
+.f-gets{
+background:#131313;border:1px solid #252525;
+padding:1.6rem 2rem;margin-bottom:2rem;
+}
+.l-gets{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-top:.9rem}
+.l-gets li{
+font-size:1rem;line-height:1.75;color:#F5F3EF;
+padding-left:1.6rem;position:relative;
+}
+.l-gets li::before{
+content:’–’;position:absolute;left:0;top:0;
+color:#C07060;font-weight:400;
+}
+
+/* ── «В результате» ── */
+.l-out{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-top:.9rem;margin-bottom:2.2rem}
+.l-out li{
+font-size:1rem;line-height:1.75;color:#F5F3EF;
+padding-left:1.6rem;position:relative;
+}
+.l-out li::before{
+content:’–’;position:absolute;left:0;top:0;
+color:#C07060;font-weight:400;
+}
+
+/* Описание — ограниченная ширина, читаемо */
+.f-desc{
+font-size:1.05rem;line-height:1.9;color:#CFCBC4;
+margin-bottom:2rem;
+max-width:680px;
+}
+
+/* Доп. текст PRO */
+.f-note{
+margin-top:1.1rem;font-size:.9rem;line-height:1.75;color:#7A7470;
+max-width:600px;
+}
+
+/* Подвал карточки */
+.f-foot{
+display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+padding-top:1.8rem;border-top:1px solid #252525;
+}
+
+/* Апгрейд-нота — крупнее */
+.upg-note{
+font-size:.85rem;font-weight:500;color:#7A7470;
+line-height:1.5;
+}
+
+/* ══════════════════════════
+КНОПКИ
+══════════════════════════ */
+.btn{
+display:inline-flex;align-items:center;justify-content:center;
+min-height:52px;height:auto;
+padding:15px 32px;
+font-family:‘Inter’,‘Helvetica Neue’,Arial,sans-serif;
+font-size:.68rem;font-weight:500;
+letter-spacing:.16em;text-transform:uppercase;
+text-align:center;white-space:normal;word-break:break-word;
+cursor:pointer;border:1px solid transparent;
+box-sizing:border-box;max-width:100%;flex-shrink:0;
+transition:background var(–tm) ease,color var(–tm) ease,
+border-color var(–tm) ease,transform var(–tm) ease,
+box-shadow var(–tm) ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.6)}
+.btn-p{background:#F5F3EF;color:#0f0f0f;border-color:#F5F3EF}
+.btn-p:hover{background:transparent;color:#F5F3EF;border-color:#F5F3EF}
+.btn-o{background:transparent;color:#CFCBC4;border-color:#303030}
+.btn-o:hover{border-color:#F5F3EF;color:#F5F3EF}
+.btn-a{background:#A1584D;color:#F5F3EF;border-color:#A1584D}
+.btn-a:hover{background:transparent;color:#C07060;border-color:#C07060}
+
+/* ══════════════════════════
+GIF РАЗДЕЛИТЕЛЬ
+══════════════════════════ */
+.gif-divider{
+background:#0f0f0f;
+display:flex;align-items:center;justify-content:center;
+padding:clamp(2.5rem,5vw,5rem) clamp(1.2rem,5vw,3.5rem);
+border-top:1px solid #252525;border-bottom:1px solid #252525;
+}
+.gif-insert{
+width:100%;max-width:720px;
+border:1px solid #252525;
+display:block;
+}
+
+/* ══════════════════════════
+ВАЖНО
+══════════════════════════ */
+#important{
+position:relative;background:#0f0f0f;
+border-top:1px solid #252525;
+}
+#important .wrap{position:relative;z-index:1}
+
+/* Заголовок «Важно» — крупнее */
+.imp-body .eyebrow{
+font-size:.85rem;
+letter-spacing:.3em;
+text-align:center;margin-bottom:3rem;
+}
+.imp-body{max-width:720px;margin:0 auto}
+.imp-body p{font-size:1.08rem;line-height:1.95;color:#F5F3EF}
+.imp-body p+p{margin-top:1.6rem}
+.imp-body p:first-of-type{
+font-family:‘Cormorant Garamond’,Georgia,serif;
+font-size:clamp(1.2rem,2.4vw,1.6rem);
+font-style:italic;color:#F5F3EF;
+}
+
+/* ══════════════════════════
+FOOTER
+══════════════════════════ */
+footer{
+padding:clamp(2.5rem,5vw,4rem) clamp(1.2rem,5vw,3.5rem);
+border-top:1px solid #252525;
+background:#0f0f0f;
+display:flex;align-items:center;justify-content:space-between;
+flex-wrap:wrap;gap:1.5rem;
+}
+.f-brand{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:1.1rem;letter-spacing:.12em;color:#CFCBC4}
+.f-links{display:flex;gap:2rem;flex-wrap:wrap}
+.f-links a{font-size:.62rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#7A7470;transition:color var(–tm) ease}
+.f-links a:hover{color:#F5F3EF}
+
+/* ══════════════════════════
+RESPONSIVE
+══════════════════════════ */
+@media(max-width:960px){
+nav .nav-links{display:none}
+.burger{display:flex}
+.f-body{grid-template-columns:1fr}
+.compare-table th,.compare-table td{padding:.9rem 1.1rem;font-size:.95rem}
+}
+
+@media(max-width:768px){
+/* Фото — полная высота, не обрезать */
+.hero-photo-full{max-height:70vw;width:100%;object-position:top center}
+/* PNG — меньше, чтобы не перекрывало лица */
+.hero-png{width:clamp(80px,12vw,130px);top:.8rem;right:.5rem}
+}
+
+@media(max-width:640px){
+/* Таблица — 2 колонки */
+.compare-table,.compare-table tbody,.compare-table thead{display:block;width:100%}
+.compare-table thead{display:none}
+.compare-table tr{display:grid;grid-template-columns:1fr 1fr;border:1px solid #252525;margin-bottom:3px}
+.compare-table td{display:flex;align-items:flex-start;gap:.5rem;border-bottom:none;font-size:.93rem;padding:.9rem 1rem}
+.compare-table td:first-child{border-right:1px solid #252525 !important;color:#CFCBC4}
+.compare-table td:last-child{color:#F5F3EF}
+.compare-table tr:nth-child(odd) td{background:#0f0f0f}
+.compare-table tr:nth-child(even) td{background:#171717}
+
+.f-foot{flex-direction:column;align-items:stretch}
+.btn{width:100%;max-width:100%;justify-content:center;padding:14px 18px}
+footer{flex-direction:column;align-items:flex-start}
+.f-links{flex-direction:column;gap:.8rem}
+.socials{gap:.8rem}
+
+/* PNG на малых экранах — скрываем */
+.hero-png{display:none}
+}
+
+@media(max-width:480px){
+:root{–cp:1.3rem}
+.compare-table tr{grid-template-columns:1fr}
+.compare-table td:first-child{border-right:none !important;border-bottom:1px solid #252525 !important}
+h1{font-size:2.9rem}
+h2{font-size:1.8rem}
+.f-name{font-size:2rem}
+.btn{padding:14px 14px;font-size:.62rem;letter-spacing:.1em}
+.hero-photo-full{max-height:80vw}
+}
+
+@media(max-width:360px){
+h1{font-size:2.5rem}
+.f-name{font-size:1.7rem}
+}
+</style>
+
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- ══════════ НАВИГАЦИЯ ══════════ -->
+
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Айдана</a>
+  <ul class="nav-links">
+    <li><a href="#method">Система</a></li>
+    <li><a href="#formats">Форматы</a></li>
+    <li><a href="#important">Важно</a></li>
+  </ul>
+  <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mmenu" id="mmenu" role="dialog" aria-label="Меню">
+  <a href="#method"    class="ml">Система</a>
+  <a href="#formats"   class="ml">Форматы</a>
+  <a href="#important" class="ml">Важно</a>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+
+<section id="hero">
+
+  <!-- Фото на всю ширину + PNG абсолютно справа -->
+
+  <div class="hero-container">
+    <img
+      src="https://i.postimg.cc/NGZcrGxz/IMG-4103.jpg"
+      alt="Айдана"
+      class="hero-photo-full"
+      loading="eager"
+    >
+    <img
+      src="https://i.postimg.cc/NjJ21rPQ/Magic-Eraser-260225-161505.png"
+      alt=""
+      class="hero-png"
+      aria-hidden="true"
+    >
+  </div>
+
+  <!-- Имя + должность + соцсети -->
+
+  <div class="hero-text">
+    <div class="hero-ey">
+      <span class="eyebrow">Имиджмейкер</span>
+    </div>
+    <h1 class="hero-name">Айдана</h1>
+    <p class="hero-sub">Автор системы типирования<br>по харизме 6-Type</p>
+    <div class="socials">
+      <a href="https://youtube.com/@aiduhaa?si=1w7qygYRSzgEOmyx" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg class="soc-icon" viewBox="0 0 24 24" fill="none">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" stroke="currentColor" stroke-width="1.5"/>
+          <polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="currentColor"/>
+        </svg>
+        <span>YouTube</span>
+      </a>
+      <a href="https://www.tiktok.com/@aiduhaa?_r=1&_t=ZS-94EpDfjwi7J" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg class="soc-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+        </svg>
+        <span>TikTok</span>
+      </a>
+      <a href="https://www.instagram.com/aiduha?igsh=YXV5ZzlhZTNzMmZt&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg class="soc-icon" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+        </svg>
+        <span>Instagram</span>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════ РАЗДЕЛИТЕЛЬ ══════════ -->
+
+<div class="divider">
+  <div class="divider-inner">
+    <span class="divider-word">Харизма</span><span class="divider-dot"></span>
+    <span class="divider-word">Образ</span><span class="divider-dot"></span>
+    <span class="divider-word">Стратегия</span><span class="divider-dot"></span>
+    <span class="divider-word">Влияние</span>
+  </div>
+</div>
+
+<!-- ══════════ МЕТОД ══════════ -->
+
+<section id="method" class="sec">
+  <div class="wrap">
+    <div class="method-top rv">
+      <span class="eyebrow">Подход</span>
+      <h2>Моя система типирования мой основной инструмент при работе с имиджем моих клиенток</h2>
+      <div class="arrow-down"></div>
+    </div>
+    <div class="rv d1" style="overflow-x:auto">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Традиционный подход</th>
+            <th>Система 6-Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="tc"><span class="mark">❌</span>Типирование по чертам лица, фигуре и внешности</div></td>
+            <td><div class="tc"><span class="mark">✅</span>Типирование по характеру и внутреннему строению</div></td>
+          </tr>
+          <tr>
+            <td><div class="tc"><span class="mark">❌</span>Сравнение с животными/погодой/локацией/мифическими существами</div></td>
+            <td><div class="tc"><span class="mark">✅</span>Сравнение с реальными выдающимися личностями в качестве референса для лучшего понимания проявления своего типа харизмы</div></td>
+          </tr>
+          <tr>
+            <td><div class="tc"><span class="mark">❌</span>Строгие рамки идет/не идет, внушение определенных качеств которые «присущи» вашей внешности, слияние всех в одно</div></td>
+            <td><div class="tc"><span class="mark">✅</span>Фокус на вашей уникальной личности, нет никакого «прайма», постоянное улучшение через управление своими 4 темпераментами - четкий внутренний стержень благодаря знанию истинного типа харизмы который является основой вашей личности , а не ее рамками</div></td>
+          </tr>
+          <tr>
+            <td><div class="tc"><span class="mark">❌</span>Ноль персонализации, один шаблон на всех</div></td>
+            <td><div class="tc"><span class="mark">✅</span>Бриф с 18 вопросами, уточняющие вопросы исходя из брифа, 3 дня предварительного анализа и подготовки майнд-карты/презентации по разбору харизмы и 3-м запросам</div></td>
+          </tr>
+          <tr>
+            <td><div class="tc"><span class="mark">❌</span>Постоянное ковыряние в ваших ранах, фокус на прошлом, гиперфокус на том «что не так», бесконечная проработка</div></td>
+            <td><div class="tc"><span class="mark">✅</span>Вы получаете полную систему работы со своей харизмой. Никакой гиперболизации, только фокус на будущем с четким планом и ясностью</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ РАЗДЕЛИТЕЛЬ ══════════ -->
+
+<div class="divider">
+  <div class="divider-inner">
+    <span class="divider-word">Форматы работы</span>
+  </div>
+</div>
+
+<!-- ══════════ ФОРМАТЫ ══════════ -->
+
+<section id="formats" class="sec">
+  <div class="wrap">
+
+```
+<div class="formats-intro rv">
+  <span class="eyebrow">Стратегическая работа</span>
+  <h2>Если вас интересует стратегическая работа по проявлению вашей уникальной внутренней личности во внешний мир через глубокий анализ и инструменты имиджа</h2>
+  <div class="arrow-down"></div>
+</div>
+
+<div class="format-stack">
+
+  <!-- ══ 01 LIGHT ══ -->
+  <div class="fcard rv">
+    <div class="fcard-idx">01</div>
+    <div class="f-tier">Light</div>
+    <div class="f-name">Экспресс-сессия</div>
+    <div class="f-tag">&nbsp;</div>
+
+    <div class="f-body">
+      <div>
+        <div class="f-lbl">Кому подойдет</div>
+        <ul class="l-who">
+          <li>желание протестировать/понять необходимость перед приобретением разбора харизмы (четкого решения)</li>
+          <li>срочный запрос по одному из аспектов имиджа</li>
+          <li>впереди запуск / мероприятие / публичное выступление, и нужно усилить подачу</li>
+          <li>четкое ощущение что что-то не так в впечатлении которое вы производите, нужен беспристрастный взгляд со стороны</li>
+          <li>ощущение внутренней потерянности при внешней стабильности</li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-lbl">Процесс работы</div>
+        <ol class="process">
+          <li>Расписываете свою проблему по имиджу</li>
+          <li>Обозначаете желаемую дату</li>
+          <li>Оплачиваете сессию и высылаете все доп.материалы по моему запросу касаемо вашего вопроса</li>
+          <li>Я изучаю ваш вопрос и готовлю майнд-карту</li>
+          <li>Обговариваем точное время и начинаем видео-чат в телеграме</li>
+          <li>60 минут сессии во время которой вы можете задать любые вопросы по своему запросу</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <p class="f-desc">Разберем ключевые аспекты вашего запроса, поймем какой конкретно образ будет максимально актуальным исходя из текущей ситуации и пропишем план какие конкретно действия на данный момент максимально повлияют на решение проблемы.</p>
+    </div>
+
+    <div class="f-gets">
+      <div class="f-lbl">После сессии вы получаете</div>
+      <ul class="l-gets">
+        <li>Майнд-карту с подробным разбором вашего запроса и пошаговым планом действий: какие конкретно действия нужны, для чего, зачем и когда их делать чтобы получить 100% результат</li>
+        <li>Список персональных рекомендаций: какие нужны для этого доп.услуги и ресурсы</li>
+        <li>Подробный анализ вашей проблемы и ее стратегическое решение</li>
+        <li>Запись сессии</li>
+      </ul>
+    </div>
+
+    <div class="f-lbl">В результате</div>
+    <ul class="l-out">
+      <li>вы получаете чёткий, беспристрастный разбор текущего впечатления</li>
+      <li>понимаете, что именно создаёт диссонанс в вашей подаче</li>
+      <li>видите конкретную причину ощущения «что-то не так»</li>
+      <li>получаете точечные корректировки, которые можно внедрить сразу</li>
+      <li>понимаете как усилить свой образ в моменте</li>
+      <li>получаете ясность и уверенность перед запуском / выступлением / важным событием</li>
+      <li>чувствуете внутреннюю собранность вместо тревоги</li>
+    </ul>
+
+    <div class="f-foot">
+      <a href="https://t.me/iamleilal?text=Здравствуйте" class="btn btn-p" target="_blank" rel="noopener">Записаться на ближайшее время</a>
+      <span class="upg-note">✅ Доступен апгрейд до формата четкого решения</span>
+    </div>
+  </div>
+
+  <!-- ══ 02 BASIC ══ -->
+  <div class="fcard rv">
+    <div class="fcard-idx">02</div>
+    <div class="f-tier">Basic</div>
+    <div class="f-name">Четкое решение</div>
+    <div class="f-tag">OG bestseller стратегическая сессия</div>
+
+    <div class="f-body">
+      <div>
+        <div class="f-lbl">Кому подойдет</div>
+        <ul class="l-who">
+          <li>хотите узнать свой тип харизмы и использовать его для усиления своего имиджа</li>
+          <li>вам нужно укрепить внутреннюю самоценность, понять уникальность и принять силу вне прошлой версии себя</li>
+          <li>вы устали метаться от одного идеала к другому и сравнивать себя с другими</li>
+          <li>не можете понять что действительно про вас и где вы настоящая</li>
+          <li>люди считывают вас не так, как вы хотите и не так как вы чувствуете себя изнутри</li>
+          <li>вас не воспринимают серьезно, пытаются обесценивать, возможности достаются тем кто объективно хуже вас</li>
+          <li>хотите понять какие действия делать чтобы проявить свой истинный типаж и раскрыть максимальный потенциал</li>
+          <li>в вашей реальности возможности уходят к тем, кто слабее, но проявляется увереннее</li>
+          <li>вы хотите быть разной, но оставаться собой</li>
+          <li>вам нужен фундамент для роста на своём уровне, вне чужих шаблонов</li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-lbl">Процесс работы</div>
+        <ol class="process">
+          <li>Отправляете мне список своих запросов (максимально 3 ключевых)</li>
+          <li>Заполняете бриф</li>
+          <li>Высылаете свои соц.сети и фото/видео мне в телеграм</li>
+          <li>Я изучаю вас как личность и анализирую вашу внешность</li>
+          <li>Обговариваем удобное время и начинаем видео-чат в телеграме</li>
+          <li>2 - 2,5 часа сессии во время которой вы можете задать любые вопросы</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <p class="f-desc">Разберем важные аспекты вашего имиджа, поймем какой конкретно образ будет максимально подчёркивать ваши сильные стороны и пропишем план какие конкретно действия на данный момент максимально помогут в раскрытии вашего внутреннего и внешнего потенциала.</p>
+    </div>
+
+    <div class="f-gets">
+      <div class="f-lbl">После стратегической сессии вы получаете</div>
+      <ul class="l-gets">
+        <li>Кастомная презентация на 40+ слайдов с подробным разбором вашего имиджа и пошаговым планом действий: какие конкретно действия нужны, для чего, зачем и когда их делать чтобы получить 100% результат</li>
+        <li>Список персональных рекомендаций: какие нужны для этого доп.услуги и ресурсы</li>
+        <li>Полный анализ вашего истинного типа харизмы и подборка темперамента в зависимости от ваших дальнейших амбиций</li>
+        <li>Запись стратегической сессии</li>
+      </ul>
+    </div>
+
+    <div class="f-lbl">В результате</div>
+    <ul class="l-out">
+      <li>вы понимаете свой тип харизмы и как использовать его как инструмент</li>
+      <li>получаете чёткий план действий по раскрытию своего потенциала</li>
+      <li>понимаете, как создавать желаемое впечатление осознанно</li>
+      <li>чувствуете уверенность и внутренний стержень</li>
+      <li>знаете, какие действия приведут к результату именно в вашем случае</li>
+    </ul>
+
+    <div class="f-foot">
+      <a href="https://t.me/iamleilal?text=Здравствуйте" class="btn btn-p" target="_blank" rel="noopener">Узнать доступную дату для записи</a>
+    </div>
+  </div>
+
+  <!-- ══ 03 PRO ══ -->
+  <div class="fcard pro rv">
+    <div class="fcard-idx">03</div>
+    <div class="f-tier">Pro</div>
+    <div class="f-name">Глубокая огранка</div>
+    <div class="f-tag">Формат глубокой огранки</div>
+
+    <div class="f-body">
+      <div>
+        <div class="f-lbl">Кому подойдет</div>
+        <ul class="l-who">
+          <li>вы уже прошли формат «Четкое решение» и хотите углубить работу с личным брендом</li>
+          <li>у вас есть публичность и вы хотите выстроить стратегию влияния на восприятие аудитории</li>
+          <li>вам важна системная работа с образом, контентом и позиционированием</li>
+          <li>вы строите личный бренд и хотите, чтобы он отражал вашу уникальность, а не следовал чужим шаблонам</li>
+          <li>вам нужна конкретная стратегия роста статуса в вашей нише</li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-lbl">Процесс работы</div>
+        <ol class="process">
+          <li>Отправляете мне список своих запросов (максимально 3 ключевых)</li>
+          <li>Заполняете расширенный бриф</li>
+          <li>Высылаете соц.сети, фото/видео, контент</li>
+          <li>3 дня глубокого анализа: харизма, личный бренд, контент, визуал</li>
+          <li>Первая сессия: разбор харизмы и базовой стратегии</li>
+          <li>Через 2 недели вторая сессия: разбор личного бренда по блокам</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <p class="f-desc">Формат для тех, кто готов к глубокой системной работе. Включает в себя всё из «Четкого решения» плюс полный разбор личного бренда, стратегию роста статуса и контент-архитектуру под ваш тип харизмы.</p>
+    </div>
+
+    <div class="f-gets">
+      <div class="f-lbl">После стратегических сессий вы получаете</div>
+      <ul class="l-gets">
+        <li>Майнд-карту с подробным разбором вашего имиджа и пошаговым планом действий: какие конкретно действия нужны, для чего, зачем и когда их делать чтобы получить 100% результат</li>
+        <li>Майнд-карту по личному бренду</li>
+        <li>Список персональных рекомендаций: какие нужны для этого доп.услуги, магазины, сервисы и ресурсы</li>
+        <li>Полный анализ вашей харизмы и четкие действия по активации силы в вашем случае</li>
+        <li>Запись стратегических сессий</li>
+      </ul>
+      <p class="f-note">Включает в себя все что включено в формат четкого решения: 1 сессия разбор харизмы, 2 сессия при выполнении действий через 2 недели разбор личного бренда</p>
+    </div>
+
+    <div class="f-lbl">В результате</div>
+    <ul class="l-out">
+      <li>готовая стратегия личного бренда, построенная на вашем типе харизмы учитывая нюансы индустрии</li>
+      <li>чёткое позиционирование в вашей нише с понятным впечатлением</li>
+      <li>систему ассоциаций, которая закрепляет за вами желаемую репутацию</li>
+      <li>понимание, какие смыслы вы транслируете сейчас и как влиять на восприятие аудитории чтобы минимизировать любые недопонимания</li>
+      <li>полная ясность в плане контента: что снимать, о чем говорить, какие триггеры использовать</li>
+      <li>стратегию роста статуса в публичности: как перейти из «славной девушки» в категорию «я хочу как она/я ею открыто восхищаюсь»</li>
+      <li>визуальную айдентику, соответствующую уровню ваших ресурсов и перспектив</li>
+      <li>точечный план масштабирования на первые 3 недели и последующие 3 месяца</li>
+      <li>четкое понимание, как повысить релевантность своего личного бренда и усилить монетизацию</li>
+    </ul>
+
+    <div class="f-foot">
+      <a href="https://t.me/iamleilal?text=Здравствуйте" class="btn btn-a" target="_blank" rel="noopener">Узнать доступную дату для записи</a>
+      <a href="https://t.me/iamleilal?text=Здравствуйте" class="btn btn-o" target="_blank" rel="noopener">Получить программу сессии по блокам</a>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ══════════ GIF ══════════ -->
+
+<div class="gif-divider">
+  <img
+    src="https://i.postimg.cc/qM0WVtBT/BE587D8B-3C6E-4754-A967-7839934C1D21.gif"
+    alt=""
+    class="gif-insert"
+    aria-hidden="true"
+  >
+</div>
+
+<!-- ══════════ ВАЖНО ══════════ -->
+
+<section id="important" class="sec">
+  <div class="wrap">
+    <div class="imp-body rv">
+      <span class="eyebrow" style="text-align:center;display:block">Важно</span>
+      <p>Форматы «Чёткое решение» и «Глубокая огранка» доступны к покупке один раз.</p>
+      <p>Работа выстроена таким образом, чтобы за одну стратегическую сессию вы получили целостную картину: понимание своей харизмы, позиционирования и конкретный план внедрения.</p>
+      <p>Я не растягиваю процесс на месяцы и не дроблю информацию на этапы ради формата сопровождения. Всё, что необходимо для трансформации, даётся структурно и в концентрированном виде.</p>
+      <p>За 2–3 часа сессии вы получаете индивидуальный разбор, которому предшествует детальный анализ ваших ответов, материалов, социальных сетей, визуала и поведенческих паттернов.</p>
+      <p>Формат предполагает вашу зрелость и готовность внедрять изменения самостоятельно.</p>
+      <p>Повторное прохождение не требуется, поскольку стратегия формируется под ваш долгосрочный вектор развития.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+
+<footer>
+  <div class="f-brand">Айдана · 6-Type</div>
+  <div class="f-links">
+    <a href="https://youtube.com/@aiduhaa?si=1w7qygYRSzgEOmyx"  target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.tiktok.com/@aiduhaa?_r=1&_t=ZS-94EpDfjwi7J" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://www.instagram.com/aiduha?igsh=YXV5ZzlhZTNzMmZt&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://t.me/iamleilal?text=Здравствуйте" target="_blank" rel="noopener">Записаться</a>
+  </div>
+</footer>
+
+<!-- ══════════ JS ══════════ -->
+
+<script>
+(function(){
+  'use strict';
+  var prog = document.getElementById('prog');
+  var nav  = document.getElementById('nav');
+
+  function updateProg(){
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    if(total > 0) prog.style.width = (window.scrollY / total * 100) + '%';
+  }
+  function updateNav(){
+    nav.classList.toggle('s', window.scrollY > 50);
+  }
+  window.addEventListener('scroll', function(){ updateProg(); updateNav(); }, {passive:true});
+
+  /* Burger */
+  var burger = document.getElementById('burger');
+  var mmenu  = document.getElementById('mmenu');
+  burger.addEventListener('click', function(){
+    var open = mmenu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+    var s = burger.querySelectorAll('span');
+    if(open){
+      s[0].style.transform = 'translateY(6px) rotate(45deg)';
+      s[1].style.opacity   = '0';
+      s[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+    } else {
+      s[0].style.transform = s[2].style.transform = '';
+      s[1].style.opacity   = '';
+    }
+  });
+  document.querySelectorAll('.ml').forEach(function(l){
+    l.addEventListener('click', function(){
+      mmenu.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      var s = burger.querySelectorAll('span');
+      s[0].style.transform = s[2].style.transform = '';
+      s[1].style.opacity = '';
+    });
+  });
+
+  /* Scroll reveal */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var d = parseFloat(getComputedStyle(e.target).transitionDelay) * 1000 || 0;
+      setTimeout(function(){ e.target.classList.add('on'); }, d);
+      io.unobserve(e.target);
+    });
+  }, {threshold:.06, rootMargin:'0px 0px -36px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  /* Hero entrance */
+  window.addEventListener('DOMContentLoaded', function(){
+    updateNav();
+    var ht = document.querySelector('.hero-text');
+    if(!ht) return;
+    ht.style.cssText = 'opacity:0;transform:translateY(16px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)';
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        ht.style.opacity   = '1';
+        ht.style.transform = 'translateY(0)';
+      });
+    });
+  });
+}());
+</script>
+
+</body>
+</html>
