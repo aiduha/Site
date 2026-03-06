@@ -239,6 +239,7 @@ display: grid;
 grid-template-columns: 1fr auto;
 align-items: start;
 position: relative;
+overflow: hidden;
 }
 
 /* Text column — left */
@@ -251,16 +252,17 @@ grid-column: 1;
 grid-row: 1;
 }
 
-/* PNG column — right, aligned to eyebrow level */
+/* PNG column — right, flush to edge, ~1.5x bigger */
 .hero-png {
 grid-column: 2;
 grid-row: 1;
 display: block;
-width: clamp(100px, 16vw, 220px);
+width: clamp(150px, 24vw, 330px);
 height: auto;
 align-self: start;
-margin-top: clamp(2rem, 4vh, 3.5rem); /* match hero-text top padding */
-margin-right: clamp(0.5rem, 2vw, 2rem);
+margin-top: clamp(2rem, 4vh, 3.5rem);
+margin-right: 0;
+padding-right: 0;
 pointer-events: none;
 position: static;
 z-index: 2;
@@ -805,9 +807,9 @@ width: 100%;
 object-position: top center;
 }
 .hero-png {
-width: clamp(70px, 14vw, 120px);
+width: clamp(100px, 22vw, 180px);
 margin-top: clamp(1.5rem, 3vh, 2.5rem);
-margin-right: 0.8rem;
+margin-right: 0;
 }
 .fcard {
 padding: 24px;
@@ -850,7 +852,7 @@ color: #CFCBC4;
 footer { flex-direction: column; align-items: flex-start; }
 .f-links { flex-direction: column; gap: 0.8rem; }
 .socials { gap: 0.8rem; }
-.hero-png { width: 80px; margin-right: 0.5rem; }
+.hero-png { width: clamp(80px, 20vw, 130px); margin-right: 0; }
 }
 
 /* ── RESPONSIVE 480px ── */
