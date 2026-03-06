@@ -9,14 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   АЙДАНА — index.html  (Netlify / GitHub Pages ready)
-   Дизайн-система: #0f0f0f фон, #F5F3EF текст, Cormorant + Inter
-   Все цвета — литеральный HEX. font-synthesis:none везде.
-   ============================================================ */
 
-/* ── ПЕРЕМЕННЫЕ ── */
-:root{
+:root {
 –bg:     #0f0f0f;
 –bg1:    #131313;
 –bg2:    #181818;
@@ -27,545 +21,889 @@
 –t3:     #7A7470;
 –acc:    #A1584D;
 –acc-lt: #C07060;
-–serif:  ‘Cormorant Garamond’,‘Georgia’,‘Times New Roman’,serif;
-–sans:   ‘Inter’,‘Helvetica Neue’,‘Arial’,sans-serif;
+–serif:  ‘Cormorant Garamond’, ‘Georgia’, ‘Times New Roman’, serif;
+–sans:   ‘Inter’, ‘Helvetica Neue’, ‘Arial’, sans-serif;
 –wrap:   1100px;
-–sec:    clamp(64px,9vw,120px);
-–cp:     clamp(1.6rem,4vw,3rem);
-–ease:   cubic-bezier(.16,1,.3,1);
-–ts:     .8s;
-–tm:     .4s;
+–sec:    clamp(64px, 9vw, 120px);
+–cp:     clamp(1.6rem, 4vw, 3rem);
+–ease:   cubic-bezier(0.16, 1, 0.3, 1);
+–ts:     0.8s;
+–tm:     0.4s;
 }
 
-/* ── RESET ── */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-synthesis:none}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{
-background:#0f0f0f;
-color:#F5F3EF;
-font-family:‘Inter’,‘Helvetica Neue’,‘Arial’,sans-serif;
-font-size:16px;font-weight:400;line-height:1.8;
-overflow-x:hidden;
--webkit-font-smoothing:antialiased;
--moz-osx-font-smoothing:grayscale;
-}
-img{display:block;max-width:100%;height:auto}
-a{text-decoration:none;color:inherit}
-::selection{background:#5C2F29;color:#F5F3EF}
-
-/* ── ТИПОГРАФИКА ── */
-h1,h2,h3,h4{
-font-family:‘Cormorant Garamond’,‘Georgia’,‘Times New Roman’,serif;
-font-weight:500;color:#F5F3EF;
-line-height:1.1;letter-spacing:.01em;
-text-rendering:optimizeLegibility;
-}
-/* Заголовки разделов — крупнее */
-h1{font-size:clamp(3.4rem,8.5vw,8rem);letter-spacing:-.01em}
-h2{font-size:clamp(2.1rem,4.5vw,3.8rem);line-height:1.15}
-p{font-size:1rem;line-height:1.8;color:#F5F3EF}
-
-.eyebrow{
-font-family:‘Inter’,‘Helvetica Neue’,‘Arial’,sans-serif;
-font-size:.68rem;font-weight:600;
-letter-spacing:.3em;text-transform:uppercase;
-color:#7A7470;display:block;margin-bottom:1.2rem;
+*, *::before, *::after {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-synthesis: none;
 }
 
-/* ── LAYOUT ── */
-.wrap{max-width:var(–wrap);margin:0 auto;padding:0 clamp(1.2rem,5vw,3.5rem)}
-.sec{padding:var(–sec) 0}
-
-/* Контентный блок — ограниченная ширина, читаемая типографика */
-.content-block{max-width:700px;margin:0 auto}
-
-/* ── SCROLL REVEAL ── */
-.rv{opacity:0;transform:translateY(20px);transition:opacity var(–ts) var(–ease),transform var(–ts) var(–ease)}
-.rv.on{opacity:1;transform:none}
-.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
-
-/* ── PROGRESS BAR ── */
-#prog{position:fixed;top:0;left:0;height:2px;width:0;background:#A1584D;z-index:500;pointer-events:none;transition:width .08s linear}
-
-/* ══════════════════════════
-НАВИГАЦИЯ
-══════════════════════════ */
-nav{
-position:fixed;top:0;left:0;right:0;z-index:400;
-height:60px;display:flex;align-items:center;justify-content:space-between;
-padding:0 clamp(1.2rem,5vw,3.5rem);
-border-bottom:1px solid #252525;
-background:transparent;
-transition:background var(–tm) ease;
-}
-nav.s{background:#0f0f0f}
-.nav-logo{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:1.15rem;letter-spacing:.14em;color:#F5F3EF;transition:color var(–tm) ease}
-.nav-logo:hover{color:#CFCBC4}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-size:.65rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#7A7470;transition:color var(–tm) ease}
-.nav-links a:hover{color:#F5F3EF}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
-.burger span{width:22px;height:1px;background:#F5F3EF;display:block;transition:all .3s ease}
-
-.mmenu{display:none;position:fixed;inset:0;z-index:399;background:#0f0f0f;flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
-.mmenu.open{display:flex}
-.mmenu a{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:clamp(2rem,6vw,3rem);letter-spacing:.08em;color:#F5F3EF;transition:color var(–tm) ease}
-.mmenu a:hover{color:#CFCBC4}
-
-/* ══════════════════════════
-HERO — photo full-width + PNG absolute right
-══════════════════════════ */
-#hero{
-min-height:100svh;
-background:#0f0f0f;
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-padding-top:60px; /* высота nav */
+html {
+scroll-behavior: smooth;
+overflow-x: hidden;
 }
 
-/* hero-container: фото на всю ширину, PNG поверх справа */
-.hero-container{
-position:relative;
-width:100%;
-overflow:hidden;
+body {
+background: #0f0f0f;
+color: #F5F3EF;
+font-family: ‘Inter’, ‘Helvetica Neue’, ‘Arial’, sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.8;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
 }
 
-/* Фото — на всю ширину блока */
-.hero-photo-full{
-width:100%;
-display:block;
-object-fit:cover;
-object-position:top center;
-max-height:90vh;
+img {
+display: block;
+max-width: 100%;
+height: auto;
 }
 
-/* PNG — абсолютно, правый верх над фото */
-.hero-png{
-position:absolute;
-top:clamp(1rem,4vh,3rem);
-right:clamp(0px,-2vw,0px);
-width:clamp(120px,14vw,200px);
-height:auto;
-object-fit:contain;
-pointer-events:none;
-z-index:10;
+a {
+text-decoration: none;
+color: inherit;
 }
 
-/* Текст-блок под фото */
-.hero-text{
-padding:clamp(2rem,4vh,3.5rem) clamp(1.2rem,5vw,3.5rem) clamp(2.5rem,5vh,4rem);
-background:#0f0f0f;
-position:relative;z-index:2;
+::selection {
+background: #5C2F29;
+color: #F5F3EF;
 }
 
-.hero-ey{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
-.hero-ey::before{content:’’;width:28px;height:1px;background:#C07060;flex-shrink:0}
-
-.hero-name{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(4rem,9.5vw,8.5rem);
-font-weight:400;color:#F5F3EF;
-letter-spacing:-.01em;line-height:.92;
-margin-bottom:1rem;
-}
-.hero-sub{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(1.05rem,1.8vw,1.3rem);
-font-style:italic;color:#CFCBC4;
-line-height:1.6;max-width:480px;
-margin-bottom:1.8rem;
+h1, h2, h3, h4 {
+font-family: ‘Cormorant Garamond’, ‘Georgia’, ‘Times New Roman’, serif;
+font-weight: 500;
+color: #F5F3EF;
+line-height: 1.1;
+letter-spacing: 0.01em;
+text-rendering: optimizeLegibility;
 }
 
-/* Соцсети */
-.socials{display:flex;gap:1rem;flex-wrap:wrap}
-.socials a{
-display:inline-flex;align-items:center;gap:.45rem;
-font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
-color:#CFCBC4;padding:8px 16px 8px 11px;
-border:1px solid #303030;
-transition:color var(–tm) ease,border-color var(–tm) ease,transform var(–tm) ease;
+h1 { font-size: clamp(3.4rem, 8.5vw, 8rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(2.1rem, 4.5vw, 3.8rem); line-height: 1.15; }
+
+p {
+font-size: 1rem;
+line-height: 1.8;
+color: #F5F3EF;
 }
-.socials a:hover{color:#F5F3EF;border-color:#CFCBC4;transform:translateY(-2px)}
-.soc-icon{width:14px;height:14px;flex-shrink:0}
+
+ul {
+padding-left: 20px;
+list-style: disc;
+}
+
+li {
+color: #F5F3EF;
+font-size: 1rem;
+line-height: 1.8;
+}
+
+.eyebrow {
+font-family: ‘Inter’, ‘Helvetica Neue’, ‘Arial’, sans-serif;
+font-size: 0.68rem;
+font-weight: 600;
+letter-spacing: 0.3em;
+text-transform: uppercase;
+color: #7A7470;
+display: block;
+margin-bottom: 1.2rem;
+}
+
+.wrap {
+max-width: var(–wrap);
+margin: 0 auto;
+padding: 0 clamp(1.2rem, 5vw, 3.5rem);
+}
+
+.sec { padding: var(–sec) 0; }
+
+/* SCROLL REVEAL */
+.rv {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity var(–ts) var(–ease), transform var(–ts) var(–ease);
+}
+.rv.on { opacity: 1; transform: none; }
+.rv.d1 { transition-delay: 0.1s; }
+.rv.d2 { transition-delay: 0.2s; }
+.rv.d3 { transition-delay: 0.3s; }
+
+/* PROGRESS BAR */
+#prog {
+position: fixed;
+top: 0; left: 0;
+height: 2px;
+width: 0;
+background: #A1584D;
+z-index: 500;
+pointer-events: none;
+transition: width 0.08s linear;
+}
+
+/* ── НАВИГАЦИЯ ── */
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 400;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 clamp(1.2rem, 5vw, 3.5rem);
+border-bottom: 1px solid #252525;
+background: transparent;
+transition: background var(–tm) ease;
+}
+nav.s { background: #0f0f0f; }
+
+.nav-logo {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: 1.15rem;
+letter-spacing: 0.14em;
+color: #F5F3EF;
+transition: color var(–tm) ease;
+}
+.nav-logo:hover { color: #CFCBC4; }
+
+.nav-links {
+display: flex;
+gap: 2rem;
+list-style: none;
+padding-left: 0;
+}
+.nav-links li { list-style: none; }
+.nav-links a {
+font-size: 0.65rem;
+font-weight: 500;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: #7A7470;
+transition: color var(–tm) ease;
+}
+.nav-links a:hover { color: #F5F3EF; }
+
+.burger {
+display: none;
+flex-direction: column;
+gap: 5px;
+cursor: pointer;
+background: none;
+border: none;
+padding: 6px;
+}
+.burger span {
+width: 22px;
+height: 1px;
+background: #F5F3EF;
+display: block;
+transition: all 0.3s ease;
+}
+
+.mmenu {
+display: none;
+position: fixed;
+inset: 0;
+z-index: 399;
+background: #0f0f0f;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 2.5rem;
+}
+.mmenu.open { display: flex; }
+.mmenu a {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: clamp(2rem, 6vw, 3rem);
+letter-spacing: 0.08em;
+color: #F5F3EF;
+transition: color var(–tm) ease;
+}
+.mmenu a:hover { color: #CFCBC4; }
+
+/* ── HERO ── */
+#hero {
+min-height: 100svh;
+background: #0f0f0f;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+padding-top: 60px;
+}
+
+.hero-container {
+position: relative;
+width: 100%;
+overflow: hidden;
+}
+
+.hero-photo-full {
+width: 100%;
+height: auto;
+display: block;
+object-fit: cover;
+object-position: top center;
+max-height: 90vh;
+}
+
+.hero-png {
+position: absolute;
+top: clamp(1rem, 4vh, 3rem);
+right: 0;
+width: clamp(120px, 14vw, 200px);
+height: auto;
+object-fit: contain;
+pointer-events: none;
+z-index: 10;
+}
+
+.hero-text {
+padding: clamp(2rem, 4vh, 3.5rem) clamp(1.2rem, 5vw, 3.5rem) clamp(2.5rem, 5vh, 4rem);
+background: #0f0f0f;
+position: relative;
+z-index: 2;
+}
+
+.hero-ey {
+display: flex;
+align-items: center;
+gap: 1rem;
+margin-bottom: 1.2rem;
+}
+.hero-ey::before {
+content: ‘’;
+width: 28px;
+height: 1px;
+background: #C07060;
+flex-shrink: 0;
+}
+
+.hero-name {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: clamp(4rem, 9.5vw, 8.5rem);
+font-weight: 400;
+color: #F5F3EF;
+letter-spacing: -0.01em;
+line-height: 0.92;
+margin-bottom: 1rem;
+}
+
+.hero-sub {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+font-style: italic;
+color: #CFCBC4;
+line-height: 1.6;
+max-width: 480px;
+margin-bottom: 1.8rem;
+}
+
+.socials {
+display: flex;
+gap: 1rem;
+flex-wrap: wrap;
+}
+.socials a {
+display: inline-flex;
+align-items: center;
+gap: 0.45rem;
+font-size: 0.62rem;
+font-weight: 500;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+color: #CFCBC4;
+padding: 8px 16px 8px 11px;
+border: 1px solid #303030;
+transition: color var(–tm) ease, border-color var(–tm) ease, transform var(–tm) ease;
+}
+.socials a:hover {
+color: #F5F3EF;
+border-color: #CFCBC4;
+transform: translateY(-2px);
+}
+.soc-icon { width: 14px; height: 14px; flex-shrink: 0; }
 
 /* ── DIVIDER ── */
-.divider{
-padding:1.8rem 0;
-border-top:1px solid #252525;border-bottom:1px solid #252525;
-background:#0f0f0f;
+.divider {
+padding: 1.8rem 0;
+border-top: 1px solid #252525;
+border-bottom: 1px solid #252525;
+background: #0f0f0f;
 }
-.divider-inner{
-display:flex;align-items:center;justify-content:center;
-gap:2rem;flex-wrap:wrap;
-padding:0 clamp(1.2rem,5vw,3.5rem);
+.divider-inner {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 2rem;
+flex-wrap: wrap;
+padding: 0 clamp(1.2rem, 5vw, 3.5rem);
 }
-.divider-word{font-size:.62rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#7A7470;white-space:nowrap}
-.divider-dot{width:3px;height:3px;border-radius:50%;background:#C07060;flex-shrink:0}
-
-/* стрелка вниз */
-.arrow-down{display:flex;align-items:center;margin-top:1.8rem}
-.arrow-down::after{
-content:’’;display:block;width:10px;height:10px;
-border-right:1px solid #C07060;border-bottom:1px solid #C07060;
-transform:rotate(45deg) translateY(-3px);
+.divider-word {
+font-size: 0.62rem;
+font-weight: 500;
+letter-spacing: 0.28em;
+text-transform: uppercase;
+color: #7A7470;
+white-space: nowrap;
 }
-
-/* ══════════════════════════
-МЕТОД
-══════════════════════════ */
-#method{position:relative;background:#0f0f0f}
-#method .wrap{position:relative;z-index:1}
-.method-top{margin-bottom:clamp(2.5rem,5vw,4rem)}
-
-/* Заголовок метода — крупнее */
-.method-top h2{
-font-size:clamp(2rem,4.5vw,3.6rem);
-line-height:1.15;
-color:#F5F3EF;
-max-width:820px;
+.divider-dot {
+width: 3px;
+height: 3px;
+border-radius: 50%;
+background: #C07060;
+flex-shrink: 0;
 }
 
-/* ── ТАБЛИЦА ── */
-.compare-table{
-width:100%;border-collapse:collapse;
-border:1px solid #252525;table-layout:fixed;
+.arrow-down {
+display: flex;
+align-items: center;
+margin-top: 1.8rem;
 }
-.compare-table thead th{
-font-family:‘Inter’,‘Helvetica Neue’,Arial,sans-serif;
-font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
-padding:1rem 1.8rem;
-background:#131313;
-border-bottom:1px solid #252525;
-text-align:left;color:#7A7470;
-}
-.compare-table thead th:first-child{border-right:1px solid #252525}
-.compare-table thead th:last-child{color:#C07060}
-.compare-table td{
-padding:1.2rem 1.8rem;
-border-bottom:1px solid #252525;
-vertical-align:top;text-align:left;
-font-size:1rem;line-height:1.8;
-}
-.compare-table td:first-child{border-right:1px solid #252525;color:#CFCBC4}
-.compare-table td:last-child{color:#F5F3EF}
-.compare-table tbody tr:last-child td{border-bottom:none}
-.compare-table tbody tr:nth-child(odd)  td{background:#0f0f0f}
-.compare-table tbody tr:nth-child(even) td{background:#171717}
-.tc{display:flex;align-items:flex-start;gap:.75rem}
-.mark{display:inline-block;flex-shrink:0;font-size:1.05rem;line-height:1;position:relative;top:.05em}
-
-/* ══════════════════════════
-ФОРМАТЫ
-══════════════════════════ */
-#formats{position:relative;background:#0f0f0f}
-#formats .wrap{position:relative;z-index:1}
-.formats-intro{max-width:760px;margin-bottom:clamp(3rem,5vw,5rem)}
-
-/* Заголовок форматов — крупнее */
-.formats-intro h2{
-margin-top:1rem;
-font-size:clamp(1.9rem,4vw,3.2rem);
-line-height:1.2;color:#F5F3EF;
+.arrow-down::after {
+content: ‘’;
+display: block;
+width: 10px;
+height: 10px;
+border-right: 1px solid #C07060;
+border-bottom: 1px solid #C07060;
+transform: rotate(45deg) translateY(-3px);
 }
 
-.format-stack{display:flex;flex-direction:column;gap:6px}
-
-/* ── Карточка формата ── */
-.fcard{
-background:#181818;border:1px solid #252525;
-padding:var(–cp);position:relative;overflow:hidden;
-transition:transform var(–tm) var(–ease),box-shadow var(–tm) var(–ease),border-color var(–tm) ease;
+/* ── МЕТОД ── */
+#method {
+position: relative;
+background: #0f0f0f;
 }
-.fcard:hover{transform:translateY(-3px);box-shadow:0 14px 50px #000;border-color:#303030}
-.fcard::before{
-content:’’;position:absolute;left:0;top:15%;bottom:15%;
-width:2px;background:#A1584D;opacity:0;
-transition:opacity var(–tm) ease;
-}
-.fcard:hover::before{opacity:.5}
-
-/* PRO */
-.fcard.pro{border-color:#5C2F29;box-shadow:0 0 0 1px #2B1210,0 6px 36px #1A0A08,inset 0 1px 0 #3D1A18}
-.fcard.pro:hover{transform:translateY(-4px);border-color:#7A3A34;box-shadow:0 0 0 1px #3D1A18,0 20px 60px #000,inset 0 1px 0 #4E2220}
-.fcard.pro::before{opacity:.55}
-.fcard.pro:hover::before{opacity:.8}
-
-/* Декор-номер фона — крупнее */
-.fcard-idx{
-position:absolute;top:var(–cp);right:var(–cp);
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(5rem,8vw,9rem);
-font-weight:400;color:#1e1e1e;line-height:1;
-pointer-events:none;user-select:none;
+#method .wrap { position: relative; z-index: 1; }
+.method-top { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.method-top h2 {
+font-size: clamp(2rem, 4.5vw, 3.6rem);
+line-height: 1.15;
+color: #F5F3EF;
+max-width: 820px;
 }
 
-/* Метка тира (Light/Basic/Pro) */
-.f-tier{
-font-size:.68rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;
-color:#7A7470;
-margin-bottom:.7rem;
-padding-top:.3rem;
+.compare-table {
+width: 100%;
+border-collapse: collapse;
+border: 1px solid #252525;
+table-layout: fixed;
 }
-.fcard.pro .f-tier{color:#C07060}
+.compare-table thead th {
+font-family: ‘Inter’, ‘Helvetica Neue’, Arial, sans-serif;
+font-size: 0.65rem;
+font-weight: 600;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+padding: 1rem 1.8rem;
+background: #131313;
+border-bottom: 1px solid #252525;
+text-align: left;
+color: #7A7470;
+}
+.compare-table thead th:first-child { border-right: 1px solid #252525; }
+.compare-table thead th:last-child { color: #C07060; }
+.compare-table td {
+padding: 1.2rem 1.8rem;
+border-bottom: 1px solid #252525;
+vertical-align: top;
+text-align: left;
+font-size: 1rem;
+line-height: 1.8;
+color: #F5F3EF;
+}
+.compare-table td:first-child { border-right: 1px solid #252525; color: #CFCBC4; }
+.compare-table td:last-child { color: #F5F3EF; }
+.compare-table tbody tr:last-child td { border-bottom: none; }
+.compare-table tbody tr:nth-child(odd) td { background: #0f0f0f; }
+.compare-table tbody tr:nth-child(even) td { background: #171717; }
 
-/* Название формата — крупнее, с отступом */
-.f-name{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(2.2rem,4vw,3.2rem);
-font-weight:400;color:#F5F3EF;line-height:1;
-margin-bottom:.5rem;
-padding-bottom:.4rem;
+.tc {
+display: flex;
+align-items: flex-start;
+gap: 0.75rem;
 }
-
-/* Подпись формата */
-.f-tag{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(.95rem,1.8vw,1.15rem);
-font-style:italic;color:#CFCBC4;
-margin-bottom:2.5rem;
-min-height:1.6em;
-}
-
-/* двухколонная сетка */
-.f-body{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:clamp(2rem,4vw,3.5rem);
-margin-bottom:2.4rem;
-}
-
-/* Лейблы секций */
-.f-lbl{
-font-size:.65rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
-color:#7A7470;
-margin-bottom:1.1rem;padding-bottom:.7rem;
-border-bottom:1px solid #252525;
-}
-
-/* ── Списки — тире как маркер ── */
-.l-who{list-style:none;display:flex;flex-direction:column;gap:.85rem}
-.l-who li{
-font-size:1rem;line-height:1.75;color:#F5F3EF;
-padding-left:1.6rem;position:relative;
-}
-.l-who li::before{
-content:’–’;
-position:absolute;left:0;top:0;
-color:#7A7470;font-weight:400;
+.mark {
+display: inline-block;
+flex-shrink: 0;
+font-size: 1.05rem;
+line-height: 1;
+position: relative;
+top: 0.05em;
 }
 
-/* ── Процесс работы — крупнее, больше отступов ── */
-.process{list-style:none;display:flex;flex-direction:column;gap:1.1rem}
-.process li{
-font-size:1rem;line-height:1.8;color:#F5F3EF;
-padding-left:2.6rem;position:relative;
+/* ── ФОРМАТЫ ── */
+#formats {
+position: relative;
+background: #0f0f0f;
 }
-.process li::before{
-position:absolute;left:0;top:.05em;
-font-size:.72rem;font-weight:600;letter-spacing:.08em;
-color:#7A7470;
-font-family:‘Inter’,‘Helvetica Neue’,Arial,sans-serif;
-line-height:1.8;
-}
-.process li:nth-child(1)::before{content:‘01’}
-.process li:nth-child(2)::before{content:‘02’}
-.process li:nth-child(3)::before{content:‘03’}
-.process li:nth-child(4)::before{content:‘04’}
-.process li:nth-child(5)::before{content:‘05’}
-.process li:nth-child(6)::before{content:‘06’}
+#formats .wrap { position: relative; z-index: 1; }
 
-/* ── «Вы получаете» ── */
-.f-gets{
-background:#131313;border:1px solid #252525;
-padding:1.6rem 2rem;margin-bottom:2rem;
+.formats-intro {
+max-width: 760px;
+margin-bottom: clamp(3rem, 5vw, 5rem);
 }
-.l-gets{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-top:.9rem}
-.l-gets li{
-font-size:1rem;line-height:1.75;color:#F5F3EF;
-padding-left:1.6rem;position:relative;
-}
-.l-gets li::before{
-content:’–’;position:absolute;left:0;top:0;
-color:#C07060;font-weight:400;
+.formats-intro h2 {
+margin-top: 1rem;
+font-size: clamp(1.9rem, 4vw, 3.2rem);
+line-height: 1.2;
+color: #F5F3EF;
 }
 
-/* ── «В результате» ── */
-.l-out{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-top:.9rem;margin-bottom:2.2rem}
-.l-out li{
-font-size:1rem;line-height:1.75;color:#F5F3EF;
-padding-left:1.6rem;position:relative;
-}
-.l-out li::before{
-content:’–’;position:absolute;left:0;top:0;
-color:#C07060;font-weight:400;
+.format-stack {
+display: flex;
+flex-direction: column;
+gap: 6px;
 }
 
-/* Описание — ограниченная ширина, читаемо */
-.f-desc{
-font-size:1.05rem;line-height:1.9;color:#CFCBC4;
-margin-bottom:2rem;
-max-width:680px;
+.fcard {
+background: #181818;
+border: 1px solid #252525;
+padding: var(–cp);
+position: relative;
+overflow: hidden;
+transition: transform var(–tm) var(–ease), box-shadow var(–tm) var(–ease), border-color var(–tm) ease;
+}
+.fcard:hover {
+transform: translateY(-3px);
+box-shadow: 0 14px 50px #000;
+border-color: #303030;
+}
+.fcard::before {
+content: ‘’;
+position: absolute;
+left: 0; top: 15%; bottom: 15%;
+width: 2px;
+background: #A1584D;
+opacity: 0;
+transition: opacity var(–tm) ease;
+}
+.fcard:hover::before { opacity: 0.5; }
+
+.fcard.pro {
+border-color: #5C2F29;
+box-shadow: 0 0 0 1px #2B1210, 0 6px 36px #1A0A08, inset 0 1px 0 #3D1A18;
+}
+.fcard.pro:hover {
+transform: translateY(-4px);
+border-color: #7A3A34;
+box-shadow: 0 0 0 1px #3D1A18, 0 20px 60px #000, inset 0 1px 0 #4E2220;
+}
+.fcard.pro::before { opacity: 0.55; }
+.fcard.pro:hover::before { opacity: 0.8; }
+
+.fcard-idx {
+position: absolute;
+top: var(–cp);
+right: var(–cp);
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: clamp(5rem, 8vw, 9rem);
+font-weight: 400;
+color: #1e1e1e;
+line-height: 1;
+pointer-events: none;
+user-select: none;
 }
 
-/* Доп. текст PRO */
-.f-note{
-margin-top:1.1rem;font-size:.9rem;line-height:1.75;color:#7A7470;
-max-width:600px;
+.f-tier {
+font-size: 0.68rem;
+font-weight: 600;
+letter-spacing: 0.32em;
+text-transform: uppercase;
+color: #7A7470;
+margin-bottom: 0.7rem;
+padding-top: 0.3rem;
+display: block;
+}
+.fcard.pro .f-tier { color: #C07060; }
+
+.f-name {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: clamp(2.2rem, 4vw, 3.2rem);
+font-weight: 400;
+color: #F5F3EF;
+line-height: 1;
+margin-bottom: 0.5rem;
+padding-bottom: 0.4rem;
+display: block;
 }
 
-/* Подвал карточки */
-.f-foot{
-display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
-padding-top:1.8rem;border-top:1px solid #252525;
+.f-tag {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+font-style: italic;
+color: #CFCBC4;
+margin-bottom: 2.5rem;
+min-height: 1.6em;
+display: block;
 }
 
-/* Апгрейд-нота — крупнее */
-.upg-note{
-font-size:.85rem;font-weight:500;color:#7A7470;
-line-height:1.5;
+.f-body {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: clamp(2rem, 4vw, 3.5rem);
+margin-bottom: 2.4rem;
 }
 
-/* ══════════════════════════
-КНОПКИ
-══════════════════════════ */
-.btn{
-display:inline-flex;align-items:center;justify-content:center;
-min-height:52px;height:auto;
-padding:15px 32px;
-font-family:‘Inter’,‘Helvetica Neue’,Arial,sans-serif;
-font-size:.68rem;font-weight:500;
-letter-spacing:.16em;text-transform:uppercase;
-text-align:center;white-space:normal;word-break:break-word;
-cursor:pointer;border:1px solid transparent;
-box-sizing:border-box;max-width:100%;flex-shrink:0;
-transition:background var(–tm) ease,color var(–tm) ease,
-border-color var(–tm) ease,transform var(–tm) ease,
+.f-lbl {
+font-size: 0.65rem;
+font-weight: 600;
+letter-spacing: 0.26em;
+text-transform: uppercase;
+color: #7A7470;
+margin-bottom: 1.1rem;
+padding-bottom: 0.7rem;
+border-bottom: 1px solid #252525;
+display: block;
+}
+
+/* Список «Кому подойдет» */
+.l-who {
+list-style: none;
+padding-left: 0;
+display: flex;
+flex-direction: column;
+gap: 0.85rem;
+}
+.l-who li {
+font-size: 1rem;
+line-height: 1.75;
+color: #F5F3EF;
+padding-left: 1.6rem;
+position: relative;
+}
+.l-who li::before {
+content: ‘–’;
+position: absolute;
+left: 0;
+top: 0;
+color: #7A7470;
+}
+
+/* Процесс работы */
+.process {
+list-style: none;
+padding-left: 0;
+display: flex;
+flex-direction: column;
+gap: 1.1rem;
+}
+.process li {
+font-size: 1rem;
+line-height: 1.8;
+color: #F5F3EF;
+padding-left: 2.6rem;
+position: relative;
+}
+.process li::before {
+position: absolute;
+left: 0;
+top: 0.05em;
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 0.08em;
+color: #7A7470;
+font-family: ‘Inter’, ‘Helvetica Neue’, Arial, sans-serif;
+line-height: 1.8;
+}
+.process li:nth-child(1)::before { content: ‘01’; }
+.process li:nth-child(2)::before { content: ‘02’; }
+.process li:nth-child(3)::before { content: ‘03’; }
+.process li:nth-child(4)::before { content: ‘04’; }
+.process li:nth-child(5)::before { content: ‘05’; }
+.process li:nth-child(6)::before { content: ‘06’; }
+
+/* «Вы получаете» */
+.f-gets {
+background: #131313;
+border: 1px solid #252525;
+padding: 1.6rem 2rem;
+margin-bottom: 2rem;
+}
+.l-gets {
+list-style: none;
+padding-left: 0;
+display: flex;
+flex-direction: column;
+gap: 0.85rem;
+margin-top: 0.9rem;
+}
+.l-gets li {
+font-size: 1rem;
+line-height: 1.75;
+color: #F5F3EF;
+padding-left: 1.6rem;
+position: relative;
+}
+.l-gets li::before {
+content: ‘–’;
+position: absolute;
+left: 0;
+top: 0;
+color: #C07060;
+}
+
+/* «В результате» */
+.l-out {
+list-style: none;
+padding-left: 0;
+display: flex;
+flex-direction: column;
+gap: 0.85rem;
+margin-top: 0.9rem;
+margin-bottom: 2.2rem;
+}
+.l-out li {
+font-size: 1rem;
+line-height: 1.75;
+color: #F5F3EF;
+padding-left: 1.6rem;
+position: relative;
+}
+.l-out li::before {
+content: ‘–’;
+position: absolute;
+left: 0;
+top: 0;
+color: #C07060;
+}
+
+.f-desc {
+font-size: 1.05rem;
+line-height: 1.9;
+color: #CFCBC4;
+margin-bottom: 2rem;
+max-width: 680px;
+}
+
+.f-note {
+margin-top: 1.1rem;
+font-size: 0.9rem;
+line-height: 1.75;
+color: #7A7470;
+max-width: 600px;
+}
+
+.f-foot {
+display: flex;
+align-items: center;
+gap: 1rem;
+flex-wrap: wrap;
+padding-top: 1.8rem;
+border-top: 1px solid #252525;
+}
+
+.upg-note {
+font-size: 0.85rem;
+font-weight: 500;
+color: #7A7470;
+line-height: 1.5;
+}
+
+/* ── КНОПКИ ── */
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+min-height: 52px;
+height: auto;
+padding: 15px 32px;
+font-family: ‘Inter’, ‘Helvetica Neue’, Arial, sans-serif;
+font-size: 0.68rem;
+font-weight: 500;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+text-align: center;
+white-space: normal;
+word-break: break-word;
+cursor: pointer;
+border: 1px solid transparent;
+box-sizing: border-box;
+max-width: 100%;
+flex-shrink: 0;
+transition: background var(–tm) ease, color var(–tm) ease,
+border-color var(–tm) ease, transform var(–tm) ease,
 box-shadow var(–tm) ease;
 }
-.btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.btn-p{background:#F5F3EF;color:#0f0f0f;border-color:#F5F3EF}
-.btn-p:hover{background:transparent;color:#F5F3EF;border-color:#F5F3EF}
-.btn-o{background:transparent;color:#CFCBC4;border-color:#303030}
-.btn-o:hover{border-color:#F5F3EF;color:#F5F3EF}
-.btn-a{background:#A1584D;color:#F5F3EF;border-color:#A1584D}
-.btn-a:hover{background:transparent;color:#C07060;border-color:#C07060}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.6); }
+.btn-p { background: #F5F3EF; color: #0f0f0f; border-color: #F5F3EF; }
+.btn-p:hover { background: transparent; color: #F5F3EF; border-color: #F5F3EF; }
+.btn-o { background: transparent; color: #CFCBC4; border-color: #303030; }
+.btn-o:hover { border-color: #F5F3EF; color: #F5F3EF; }
+.btn-a { background: #A1584D; color: #F5F3EF; border-color: #A1584D; }
+.btn-a:hover { background: transparent; color: #C07060; border-color: #C07060; }
 
-/* ══════════════════════════
-GIF РАЗДЕЛИТЕЛЬ
-══════════════════════════ */
-.gif-divider{
-background:#0f0f0f;
-display:flex;align-items:center;justify-content:center;
-padding:clamp(2.5rem,5vw,5rem) clamp(1.2rem,5vw,3.5rem);
-border-top:1px solid #252525;border-bottom:1px solid #252525;
+/* ── GIF ── */
+.gif-divider {
+background: #0f0f0f;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: clamp(2.5rem, 5vw, 5rem) clamp(1.2rem, 5vw, 3.5rem);
+border-top: 1px solid #252525;
+border-bottom: 1px solid #252525;
 }
-.gif-insert{
-width:100%;max-width:720px;
-border:1px solid #252525;
-display:block;
-}
-
-/* ══════════════════════════
-ВАЖНО
-══════════════════════════ */
-#important{
-position:relative;background:#0f0f0f;
-border-top:1px solid #252525;
-}
-#important .wrap{position:relative;z-index:1}
-
-/* Заголовок «Важно» — крупнее */
-.imp-body .eyebrow{
-font-size:.85rem;
-letter-spacing:.3em;
-text-align:center;margin-bottom:3rem;
-}
-.imp-body{max-width:720px;margin:0 auto}
-.imp-body p{font-size:1.08rem;line-height:1.95;color:#F5F3EF}
-.imp-body p+p{margin-top:1.6rem}
-.imp-body p:first-of-type{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(1.2rem,2.4vw,1.6rem);
-font-style:italic;color:#F5F3EF;
+.gif-insert {
+width: 100%;
+max-width: 720px;
+border: 1px solid #252525;
+display: block;
 }
 
-/* ══════════════════════════
-FOOTER
-══════════════════════════ */
-footer{
-padding:clamp(2.5rem,5vw,4rem) clamp(1.2rem,5vw,3.5rem);
-border-top:1px solid #252525;
-background:#0f0f0f;
-display:flex;align-items:center;justify-content:space-between;
-flex-wrap:wrap;gap:1.5rem;
+/* ── ВАЖНО ── */
+#important {
+position: relative;
+background: #0f0f0f;
+border-top: 1px solid #252525;
 }
-.f-brand{font-family:‘Cormorant Garamond’,Georgia,serif;font-size:1.1rem;letter-spacing:.12em;color:#CFCBC4}
-.f-links{display:flex;gap:2rem;flex-wrap:wrap}
-.f-links a{font-size:.62rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#7A7470;transition:color var(–tm) ease}
-.f-links a:hover{color:#F5F3EF}
+#important .wrap { position: relative; z-index: 1; }
 
-/* ══════════════════════════
-RESPONSIVE
-══════════════════════════ */
-@media(max-width:960px){
-nav .nav-links{display:none}
-.burger{display:flex}
-.f-body{grid-template-columns:1fr}
-.compare-table th,.compare-table td{padding:.9rem 1.1rem;font-size:.95rem}
+.imp-body {
+max-width: 720px;
+margin: 0 auto;
 }
-
-@media(max-width:768px){
-/* Фото — полная высота, не обрезать */
-.hero-photo-full{max-height:70vw;width:100%;object-position:top center}
-/* PNG — меньше, чтобы не перекрывало лица */
-.hero-png{width:clamp(80px,12vw,130px);top:.8rem;right:.5rem}
+.imp-body .eyebrow {
+font-size: 0.85rem;
+letter-spacing: 0.3em;
+text-align: center;
+margin-bottom: 3rem;
 }
-
-@media(max-width:640px){
-/* Таблица — 2 колонки */
-.compare-table,.compare-table tbody,.compare-table thead{display:block;width:100%}
-.compare-table thead{display:none}
-.compare-table tr{display:grid;grid-template-columns:1fr 1fr;border:1px solid #252525;margin-bottom:3px}
-.compare-table td{display:flex;align-items:flex-start;gap:.5rem;border-bottom:none;font-size:.93rem;padding:.9rem 1rem}
-.compare-table td:first-child{border-right:1px solid #252525 !important;color:#CFCBC4}
-.compare-table td:last-child{color:#F5F3EF}
-.compare-table tr:nth-child(odd) td{background:#0f0f0f}
-.compare-table tr:nth-child(even) td{background:#171717}
-
-.f-foot{flex-direction:column;align-items:stretch}
-.btn{width:100%;max-width:100%;justify-content:center;padding:14px 18px}
-footer{flex-direction:column;align-items:flex-start}
-.f-links{flex-direction:column;gap:.8rem}
-.socials{gap:.8rem}
-
-/* PNG на малых экранах — скрываем */
-.hero-png{display:none}
+.imp-body p {
+font-size: 1.08rem;
+line-height: 1.95;
+color: #F5F3EF;
+}
+.imp-body p + p { margin-top: 1.6rem; }
+.imp-body p:first-of-type {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+font-style: italic;
+color: #F5F3EF;
 }
 
-@media(max-width:480px){
-:root{–cp:1.3rem}
-.compare-table tr{grid-template-columns:1fr}
-.compare-table td:first-child{border-right:none !important;border-bottom:1px solid #252525 !important}
-h1{font-size:2.9rem}
-h2{font-size:1.8rem}
-.f-name{font-size:2rem}
-.btn{padding:14px 14px;font-size:.62rem;letter-spacing:.1em}
-.hero-photo-full{max-height:80vw}
+/* ── FOOTER ── */
+footer {
+padding: clamp(2.5rem, 5vw, 4rem) clamp(1.2rem, 5vw, 3.5rem);
+border-top: 1px solid #252525;
+background: #0f0f0f;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 1.5rem;
+}
+.f-brand {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: 1.1rem;
+letter-spacing: 0.12em;
+color: #CFCBC4;
+}
+.f-links {
+display: flex;
+gap: 2rem;
+flex-wrap: wrap;
+list-style: none;
+padding-left: 0;
+}
+.f-links a {
+font-size: 0.62rem;
+font-weight: 500;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: #7A7470;
+transition: color var(–tm) ease;
+}
+.f-links a:hover { color: #F5F3EF; }
+
+/* ── RESPONSIVE 960px ── */
+@media (max-width: 960px) {
+nav .nav-links { display: none; }
+.burger { display: flex; }
+.f-body { grid-template-columns: 1fr; }
+.compare-table th,
+.compare-table td { padding: 0.9rem 1.1rem; font-size: 0.95rem; }
 }
 
-@media(max-width:360px){
-h1{font-size:2.5rem}
-.f-name{font-size:1.7rem}
+/* ── RESPONSIVE 768px ── */
+@media (max-width: 768px) {
+.hero-photo-full {
+max-height: 70vw;
+width: 100%;
+object-position: top center;
 }
+.hero-png {
+width: clamp(80px, 12vw, 130px);
+top: 0.8rem;
+right: 0.5rem;
+}
+.fcard-idx { font-size: 4rem; }
+.f-name { font-size: 2rem; }
+.f-body { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* ── RESPONSIVE 640px ── */
+@media (max-width: 640px) {
+.compare-table,
+.compare-table tbody,
+.compare-table thead { display: block; width: 100%; }
+.compare-table thead { display: none; }
+.compare-table tr {
+display: grid;
+grid-template-columns: 1fr 1fr;
+border: 1px solid #252525;
+margin-bottom: 3px;
+}
+.compare-table td {
+display: flex;
+align-items: flex-start;
+gap: 0.5rem;
+border-bottom: none;
+font-size: 0.93rem;
+padding: 0.9rem 1rem;
+}
+.compare-table td:first-child {
+border-right: 1px solid #252525 !important;
+color: #CFCBC4;
+}
+.compare-table td:last-child { color: #F5F3EF; }
+.compare-table tr:nth-child(odd) td { background: #0f0f0f; }
+.compare-table tr:nth-child(even) td { background: #171717; }
+.f-foot { flex-direction: column; align-items: stretch; }
+.btn { width: 100%; max-width: 100%; justify-content: center; padding: 14px 18px; }
+footer { flex-direction: column; align-items: flex-start; }
+.f-links { flex-direction: column; gap: 0.8rem; }
+.socials { gap: 0.8rem; }
+.hero-png { display: none; }
+}
+
+/* ── RESPONSIVE 480px ── */
+@media (max-width: 480px) {
+:root { –cp: 1.3rem; }
+.compare-table tr { grid-template-columns: 1fr; }
+.compare-table td:first-child {
+border-right: none !important;
+border-bottom: 1px solid #252525 !important;
+}
+h1 { font-size: 2.9rem; }
+h2 { font-size: 1.8rem; }
+.f-name { font-size: 1.8rem; }
+.btn { padding: 14px 14px; font-size: 0.62rem; letter-spacing: 0.1em; }
+.hero-photo-full { max-height: 80vw; }
+}
+
+@media (max-width: 360px) {
+h1 { font-size: 2.5rem; }
+.f-name { font-size: 1.6rem; }
+}
+
 </style>
-
 </head>
 <body>
 
 <div id="prog"></div>
 
-<!-- ══════════ НАВИГАЦИЯ ══════════ -->
+<!-- НАВИГАЦИЯ -->
 
 <nav id="nav">
   <a href="#hero" class="nav-logo">Айдана</a>
@@ -580,17 +918,14 @@ h1{font-size:2.5rem}
 </nav>
 
 <div class="mmenu" id="mmenu" role="dialog" aria-label="Меню">
-  <a href="#method"    class="ml">Система</a>
-  <a href="#formats"   class="ml">Форматы</a>
+  <a href="#method" class="ml">Система</a>
+  <a href="#formats" class="ml">Форматы</a>
   <a href="#important" class="ml">Важно</a>
 </div>
 
-<!-- ══════════ HERO ══════════ -->
+<!-- HERO -->
 
 <section id="hero">
-
-  <!-- Фото на всю ширину + PNG абсолютно справа -->
-
   <div class="hero-container">
     <img
       src="https://i.postimg.cc/NGZcrGxz/IMG-4103.jpg"
@@ -605,9 +940,6 @@ h1{font-size:2.5rem}
       aria-hidden="true"
     >
   </div>
-
-  <!-- Имя + должность + соцсети -->
-
   <div class="hero-text">
     <div class="hero-ey">
       <span class="eyebrow">Имиджмейкер</span>
@@ -638,10 +970,9 @@ h1{font-size:2.5rem}
       </a>
     </div>
   </div>
-
 </section>
 
-<!-- ══════════ РАЗДЕЛИТЕЛЬ ══════════ -->
+<!-- РАЗДЕЛИТЕЛЬ -->
 
 <div class="divider">
   <div class="divider-inner">
@@ -652,7 +983,7 @@ h1{font-size:2.5rem}
   </div>
 </div>
 
-<!-- ══════════ МЕТОД ══════════ -->
+<!-- МЕТОД -->
 
 <section id="method" class="sec">
   <div class="wrap">
@@ -680,7 +1011,7 @@ h1{font-size:2.5rem}
           </tr>
           <tr>
             <td><div class="tc"><span class="mark">❌</span>Строгие рамки идет/не идет, внушение определенных качеств которые «присущи» вашей внешности, слияние всех в одно</div></td>
-            <td><div class="tc"><span class="mark">✅</span>Фокус на вашей уникальной личности, нет никакого «прайма», постоянное улучшение через управление своими 4 темпераментами - четкий внутренний стержень благодаря знанию истинного типа харизмы который является основой вашей личности , а не ее рамками</div></td>
+            <td><div class="tc"><span class="mark">✅</span>Фокус на вашей уникальной личности, нет никакого «прайма», постоянное улучшение через управление своими 4 темпераментами — четкий внутренний стержень благодаря знанию истинного типа харизмы который является основой вашей личности, а не ее рамками</div></td>
           </tr>
           <tr>
             <td><div class="tc"><span class="mark">❌</span>Ноль персонализации, один шаблон на всех</div></td>
@@ -696,7 +1027,7 @@ h1{font-size:2.5rem}
   </div>
 </section>
 
-<!-- ══════════ РАЗДЕЛИТЕЛЬ ══════════ -->
+<!-- РАЗДЕЛИТЕЛЬ -->
 
 <div class="divider">
   <div class="divider-inner">
@@ -704,7 +1035,7 @@ h1{font-size:2.5rem}
   </div>
 </div>
 
-<!-- ══════════ ФОРМАТЫ ══════════ -->
+<!-- ФОРМАТЫ -->
 
 <section id="formats" class="sec">
   <div class="wrap">
@@ -718,16 +1049,15 @@ h1{font-size:2.5rem}
 
 <div class="format-stack">
 
-  <!-- ══ 01 LIGHT ══ -->
+  <!-- 01 LIGHT -->
   <div class="fcard rv">
     <div class="fcard-idx">01</div>
-    <div class="f-tier">Light</div>
-    <div class="f-name">Экспресс-сессия</div>
-    <div class="f-tag">&nbsp;</div>
-
+    <span class="f-tier">Light</span>
+    <span class="f-name">Экспресс-сессия</span>
+    <span class="f-tag">&nbsp;</span>
     <div class="f-body">
       <div>
-        <div class="f-lbl">Кому подойдет</div>
+        <span class="f-lbl">Кому подойдет</span>
         <ul class="l-who">
           <li>желание протестировать/понять необходимость перед приобретением разбора харизмы (четкого решения)</li>
           <li>срочный запрос по одному из аспектов имиджа</li>
@@ -737,7 +1067,7 @@ h1{font-size:2.5rem}
         </ul>
       </div>
       <div>
-        <div class="f-lbl">Процесс работы</div>
+        <span class="f-lbl">Процесс работы</span>
         <ol class="process">
           <li>Расписываете свою проблему по имиджу</li>
           <li>Обозначаете желаемую дату</li>
@@ -748,13 +1078,9 @@ h1{font-size:2.5rem}
         </ol>
       </div>
     </div>
-
-    <div class="content-block">
-      <p class="f-desc">Разберем ключевые аспекты вашего запроса, поймем какой конкретно образ будет максимально актуальным исходя из текущей ситуации и пропишем план какие конкретно действия на данный момент максимально повлияют на решение проблемы.</p>
-    </div>
-
+    <p class="f-desc">Разберем ключевые аспекты вашего запроса, поймем какой конкретно образ будет максимально актуальным исходя из текущей ситуации и пропишем план какие конкретно действия на данный момент максимально повлияют на решение проблемы.</p>
     <div class="f-gets">
-      <div class="f-lbl">После сессии вы получаете</div>
+      <span class="f-lbl">После сессии вы получаете</span>
       <ul class="l-gets">
         <li>Майнд-карту с подробным разбором вашего запроса и пошаговым планом действий: какие конкретно действия нужны, для чего, зачем и когда их делать чтобы получить 100% результат</li>
         <li>Список персональных рекомендаций: какие нужны для этого доп.услуги и ресурсы</li>
@@ -762,8 +1088,7 @@ h1{font-size:2.5rem}
         <li>Запись сессии</li>
       </ul>
     </div>
-
-    <div class="f-lbl">В результате</div>
+    <span class="f-lbl">В результате</span>
     <ul class="l-out">
       <li>вы получаете чёткий, беспристрастный разбор текущего впечатления</li>
       <li>понимаете, что именно создаёт диссонанс в вашей подаче</li>
@@ -773,23 +1098,21 @@ h1{font-size:2.5rem}
       <li>получаете ясность и уверенность перед запуском / выступлением / важным событием</li>
       <li>чувствуете внутреннюю собранность вместо тревоги</li>
     </ul>
-
     <div class="f-foot">
       <a href="https://t.me/iamleilal?text=Здравствуйте" class="btn btn-p" target="_blank" rel="noopener">Записаться на ближайшее время</a>
       <span class="upg-note">✅ Доступен апгрейд до формата четкого решения</span>
     </div>
   </div>
 
-  <!-- ══ 02 BASIC ══ -->
+  <!-- 02 BASIC -->
   <div class="fcard rv">
     <div class="fcard-idx">02</div>
-    <div class="f-tier">Basic</div>
-    <div class="f-name">Четкое решение</div>
-    <div class="f-tag">OG bestseller стратегическая сессия</div>
-
+    <span class="f-tier">Basic</span>
+    <span class="f-name">Четкое решение</span>
+    <span class="f-tag">OG bestseller стратегическая сессия</span>
     <div class="f-body">
       <div>
-        <div class="f-lbl">Кому подойдет</div>
+        <span class="f-lbl">Кому подойдет</span>
         <ul class="l-who">
           <li>хотите узнать свой тип харизмы и использовать его для усиления своего имиджа</li>
           <li>вам нужно укрепить внутреннюю самоценность, понять уникальность и принять силу вне прошлой версии себя</li>
@@ -804,24 +1127,20 @@ h1{font-size:2.5rem}
         </ul>
       </div>
       <div>
-        <div class="f-lbl">Процесс работы</div>
+        <span class="f-lbl">Процесс работы</span>
         <ol class="process">
           <li>Отправляете мне список своих запросов (максимально 3 ключевых)</li>
           <li>Заполняете бриф</li>
           <li>Высылаете свои соц.сети и фото/видео мне в телеграм</li>
           <li>Я изучаю вас как личность и анализирую вашу внешность</li>
           <li>Обговариваем удобное время и начинаем видео-чат в телеграме</li>
-          <li>2 - 2,5 часа сессии во время которой вы можете задать любые вопросы</li>
+          <li>2–2,5 часа сессии во время которой вы можете задать любые вопросы</li>
         </ol>
       </div>
     </div>
-
-    <div class="content-block">
-      <p class="f-desc">Разберем важные аспекты вашего имиджа, поймем какой конкретно образ будет максимально подчёркивать ваши сильные стороны и пропишем план какие конкретно действия на данный момент максимально помогут в раскрытии вашего внутреннего и внешнего потенциала.</p>
-    </div>
-
+    <p class="f-desc">Разберем важные аспекты вашего имиджа, поймем какой конкретно образ будет максимально подчёркивать ваши сильные стороны и пропишем план какие конкретно действия на данный момент максимально помогут в раскрытии вашего внутреннего и внешнего потенциала.</p>
     <div class="f-gets">
-      <div class="f-lbl">После стратегической сессии вы получаете</div>
+      <span class="f-lbl">После стратегической сессии вы получаете</span>
       <ul class="l-gets">
         <li>Кастомная презентация на 40+ слайдов с подробным разбором вашего имиджа и пошаговым планом действий: какие конкретно действия нужны, для чего, зачем и когда их делать чтобы получить 100% результат</li>
         <li>Список персональных рекомендаций: какие нужны для этого доп.услуги и ресурсы</li>
@@ -829,8 +1148,7 @@ h1{font-size:2.5rem}
         <li>Запись стратегической сессии</li>
       </ul>
     </div>
-
-    <div class="f-lbl">В результате</div>
+    <span class="f-lbl">В результате</span>
     <ul class="l-out">
       <li>вы понимаете свой тип харизмы и как использовать его как инструмент</li>
       <li>получаете чёткий план действий по раскрытию своего потенциала</li>
@@ -838,22 +1156,20 @@ h1{font-size:2.5rem}
       <li>чувствуете уверенность и внутренний стержень</li>
       <li>знаете, какие действия приведут к результату именно в вашем случае</li>
     </ul>
-
     <div class="f-foot">
       <a href="https://t.me/iamleilal?text=Здравствуйте" class="btn btn-p" target="_blank" rel="noopener">Узнать доступную дату для записи</a>
     </div>
   </div>
 
-  <!-- ══ 03 PRO ══ -->
+  <!-- 03 PRO -->
   <div class="fcard pro rv">
     <div class="fcard-idx">03</div>
-    <div class="f-tier">Pro</div>
-    <div class="f-name">Глубокая огранка</div>
-    <div class="f-tag">Формат глубокой огранки</div>
-
+    <span class="f-tier">Pro</span>
+    <span class="f-name">Глубокая огранка</span>
+    <span class="f-tag">Формат глубокой огранки</span>
     <div class="f-body">
       <div>
-        <div class="f-lbl">Кому подойдет</div>
+        <span class="f-lbl">Кому подойдет</span>
         <ul class="l-who">
           <li>вы уже прошли формат «Четкое решение» и хотите углубить работу с личным брендом</li>
           <li>у вас есть публичность и вы хотите выстроить стратегию влияния на восприятие аудитории</li>
@@ -863,7 +1179,7 @@ h1{font-size:2.5rem}
         </ul>
       </div>
       <div>
-        <div class="f-lbl">Процесс работы</div>
+        <span class="f-lbl">Процесс работы</span>
         <ol class="process">
           <li>Отправляете мне список своих запросов (максимально 3 ключевых)</li>
           <li>Заполняете расширенный бриф</li>
@@ -874,13 +1190,9 @@ h1{font-size:2.5rem}
         </ol>
       </div>
     </div>
-
-    <div class="content-block">
-      <p class="f-desc">Формат для тех, кто готов к глубокой системной работе. Включает в себя всё из «Четкого решения» плюс полный разбор личного бренда, стратегию роста статуса и контент-архитектуру под ваш тип харизмы.</p>
-    </div>
-
+    <p class="f-desc">Формат для тех, кто готов к глубокой системной работе. Включает в себя всё из «Четкого решения» плюс полный разбор личного бренда, стратегию роста статуса и контент-архитектуру под ваш тип харизмы.</p>
     <div class="f-gets">
-      <div class="f-lbl">После стратегических сессий вы получаете</div>
+      <span class="f-lbl">После стратегических сессий вы получаете</span>
       <ul class="l-gets">
         <li>Майнд-карту с подробным разбором вашего имиджа и пошаговым планом действий: какие конкретно действия нужны, для чего, зачем и когда их делать чтобы получить 100% результат</li>
         <li>Майнд-карту по личному бренду</li>
@@ -890,8 +1202,7 @@ h1{font-size:2.5rem}
       </ul>
       <p class="f-note">Включает в себя все что включено в формат четкого решения: 1 сессия разбор харизмы, 2 сессия при выполнении действий через 2 недели разбор личного бренда</p>
     </div>
-
-    <div class="f-lbl">В результате</div>
+    <span class="f-lbl">В результате</span>
     <ul class="l-out">
       <li>готовая стратегия личного бренда, построенная на вашем типе харизмы учитывая нюансы индустрии</li>
       <li>чёткое позиционирование в вашей нише с понятным впечатлением</li>
@@ -903,7 +1214,6 @@ h1{font-size:2.5rem}
       <li>точечный план масштабирования на первые 3 недели и последующие 3 месяца</li>
       <li>четкое понимание, как повысить релевантность своего личного бренда и усилить монетизацию</li>
     </ul>
-
     <div class="f-foot">
       <a href="https://t.me/iamleilal?text=Здравствуйте" class="btn btn-a" target="_blank" rel="noopener">Узнать доступную дату для записи</a>
       <a href="https://t.me/iamleilal?text=Здравствуйте" class="btn btn-o" target="_blank" rel="noopener">Получить программу сессии по блокам</a>
@@ -916,7 +1226,7 @@ h1{font-size:2.5rem}
   </div>
 </section>
 
-<!-- ══════════ GIF ══════════ -->
+<!-- GIF -->
 
 <div class="gif-divider">
   <img
@@ -927,12 +1237,12 @@ h1{font-size:2.5rem}
   >
 </div>
 
-<!-- ══════════ ВАЖНО ══════════ -->
+<!-- ВАЖНО -->
 
 <section id="important" class="sec">
   <div class="wrap">
     <div class="imp-body rv">
-      <span class="eyebrow" style="text-align:center;display:block">Важно</span>
+      <span class="eyebrow">Важно</span>
       <p>Форматы «Чёткое решение» и «Глубокая огранка» доступны к покупке один раз.</p>
       <p>Работа выстроена таким образом, чтобы за одну стратегическую сессию вы получили целостную картину: понимание своей харизмы, позиционирования и конкретный план внедрения.</p>
       <p>Я не растягиваю процесс на месяцы и не дроблю информацию на этапы ради формата сопровождения. Всё, что необходимо для трансформации, даётся структурно и в концентрированном виде.</p>
@@ -943,81 +1253,76 @@ h1{font-size:2.5rem}
   </div>
 </section>
 
-<!-- ══════════ FOOTER ══════════ -->
+<!-- FOOTER -->
 
 <footer>
   <div class="f-brand">Айдана · 6-Type</div>
   <div class="f-links">
-    <a href="https://youtube.com/@aiduhaa?si=1w7qygYRSzgEOmyx"  target="_blank" rel="noopener">YouTube</a>
+    <a href="https://youtube.com/@aiduhaa?si=1w7qygYRSzgEOmyx" target="_blank" rel="noopener">YouTube</a>
     <a href="https://www.tiktok.com/@aiduhaa?_r=1&_t=ZS-94EpDfjwi7J" target="_blank" rel="noopener">TikTok</a>
     <a href="https://www.instagram.com/aiduha?igsh=YXV5ZzlhZTNzMmZt&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
     <a href="https://t.me/iamleilal?text=Здравствуйте" target="_blank" rel="noopener">Записаться</a>
   </div>
 </footer>
 
-<!-- ══════════ JS ══════════ -->
-
 <script>
-(function(){
+(function () {
   'use strict';
   var prog = document.getElementById('prog');
   var nav  = document.getElementById('nav');
 
-  function updateProg(){
+  function updateProg() {
     var total = document.documentElement.scrollHeight - window.innerHeight;
-    if(total > 0) prog.style.width = (window.scrollY / total * 100) + '%';
+    if (total > 0) prog.style.width = (window.scrollY / total * 100) + '%';
   }
-  function updateNav(){
+  function updateNav() {
     nav.classList.toggle('s', window.scrollY > 50);
   }
-  window.addEventListener('scroll', function(){ updateProg(); updateNav(); }, {passive:true});
+  window.addEventListener('scroll', function () { updateProg(); updateNav(); }, { passive: true });
 
-  /* Burger */
   var burger = document.getElementById('burger');
   var mmenu  = document.getElementById('mmenu');
-  burger.addEventListener('click', function(){
+  burger.addEventListener('click', function () {
     var open = mmenu.classList.toggle('open');
     burger.setAttribute('aria-expanded', String(open));
     var s = burger.querySelectorAll('span');
-    if(open){
+    if (open) {
       s[0].style.transform = 'translateY(6px) rotate(45deg)';
       s[1].style.opacity   = '0';
       s[2].style.transform = 'translateY(-6px) rotate(-45deg)';
     } else {
       s[0].style.transform = s[2].style.transform = '';
-      s[1].style.opacity   = '';
+      s[1].style.opacity = '';
     }
   });
-  document.querySelectorAll('.ml').forEach(function(l){
-    l.addEventListener('click', function(){
+  document.querySelectorAll('.ml').forEach(function (l) {
+    l.addEventListener('click', function () {
       mmenu.classList.remove('open');
-      burger.setAttribute('aria-expanded','false');
+      burger.setAttribute('aria-expanded', 'false');
       var s = burger.querySelectorAll('span');
       s[0].style.transform = s[2].style.transform = '';
       s[1].style.opacity = '';
     });
   });
 
-  /* Scroll reveal */
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
       var d = parseFloat(getComputedStyle(e.target).transitionDelay) * 1000 || 0;
-      setTimeout(function(){ e.target.classList.add('on'); }, d);
+      setTimeout(function () { e.target.classList.add('on'); }, d);
       io.unobserve(e.target);
     });
-  }, {threshold:.06, rootMargin:'0px 0px -36px 0px'});
-  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  }, { threshold: 0.06, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
 
-  /* Hero entrance */
-  window.addEventListener('DOMContentLoaded', function(){
+  window.addEventListener('DOMContentLoaded', function () {
     updateNav();
     var ht = document.querySelector('.hero-text');
-    if(!ht) return;
+    if (!ht) return;
     ht.style.cssText = 'opacity:0;transform:translateY(16px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)';
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){
-        ht.style.opacity   = '1';
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        ht.style.opacity = '1';
         ht.style.transform = 'translateY(0)';
       });
     });
