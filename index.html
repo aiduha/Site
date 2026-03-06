@@ -600,37 +600,24 @@ display: block;
 /* l-who handled by .f-body ul rules above */
 
 /* Процесс работы */
-.process {
-list-style: none;
-padding-left: 0;
+.process-list {
+list-style: decimal;
+padding-left: 20px;
 display: flex;
 flex-direction: column;
 gap: 1.1rem;
+margin-top: 0;
 }
-.process li {
+.process-list li {
 font-size: 1rem;
 line-height: 1.8;
 color: #F5F3EF;
-padding-left: 2.6rem;
-position: relative;
+padding-left: 0.4rem;
 }
-.process li::before {
-position: absolute;
-left: 0;
-top: 0.05em;
-font-size: 0.72rem;
-font-weight: 600;
-letter-spacing: 0.08em;
+.process-list li::marker {
 color: #A04F4F;
-font-family: ‘Inter’, ‘Helvetica Neue’, Arial, sans-serif;
-line-height: 1.8;
+font-weight: 600;
 }
-.process li:nth-child(1)::before { content: ‘1’; }
-.process li:nth-child(2)::before { content: ‘2’; }
-.process li:nth-child(3)::before { content: ‘3’; }
-.process li:nth-child(4)::before { content: ‘4’; }
-.process li:nth-child(5)::before { content: ‘5’; }
-.process li:nth-child(6)::before { content: ‘6’; }
 
 /* «Вы получаете» */
 .f-gets {
@@ -1046,7 +1033,7 @@ h1 { font-size: 2.5rem; }
       </div>
       <div>
         <span class="f-lbl">Процесс работы</span>
-        <ol class="process">
+        <ol class="process-list">
           <li>Расписываете свою проблему по имиджу</li>
           <li>Обозначаете желаемую дату</li>
           <li>Оплачиваете сессию и высылаете все доп.материалы по моему запросу касаемо вашего вопроса</li>
@@ -1106,7 +1093,7 @@ h1 { font-size: 2.5rem; }
       </div>
       <div>
         <span class="f-lbl">Процесс работы</span>
-        <ol class="process">
+        <ol class="process-list">
           <li>Отправляете мне список своих запросов (максимально 3 ключевых)</li>
           <li>Заполняете бриф</li>
           <li>Высылаете свои соц.сети и фото/видео мне в телеграм</li>
@@ -1158,7 +1145,7 @@ h1 { font-size: 2.5rem; }
       </div>
       <div>
         <span class="f-lbl">Процесс работы</span>
-        <ol class="process">
+        <ol class="process-list">
           <li>Отправляете мне список своих запросов (максимально 3 ключевых)</li>
           <li>Заполняете расширенный бриф</li>
           <li>Высылаете соц.сети, фото/видео, контент</li>
